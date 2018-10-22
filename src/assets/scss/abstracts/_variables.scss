@@ -1,0 +1,68 @@
+//SCSS VARIABLES
+
+/** 
+    @VARIABLES FOR: COLORS
+    @PRIMARY COLORS: primary-one = midnight, primary-two = ocean, pimary-three-tan
+**/
+
+$color-primary: #303B47;
+$color-secondary: #0D5387;
+$color-tertiary: #FCB040;
+
+$color-primary-high: #0057B2;
+$color-primary-medium: #12559B;
+$color-primary-light: #50D4B7;
+$color-primary-dim: #8BC4C6;
+
+$color-secondary-high: #0E78BD;
+$color-secondary-medium: #007CFF;
+$color-secondary-light: #4A97E8;
+$color-secondary-dim: #486F99;
+
+$color-tertiary-high: #E8AE4A;
+$color-tertiary-medium: #FFAA19;
+$color-tertiary-light: #FFA100;
+$color-tertiary-dim: #FFC96B;
+
+$color-font: #313B45;
+$color-font-light: #A7A7B4;
+$color-link: #227EB3;
+
+$color-white: #fff;
+$color-border: #dedede;
+$color-black: #000;
+
+//Override bootstrap variables
+$primary:#0D5387;
+$secondary: #303B47;
+$danger: #E62041;
+
+
+// color shades
+$colors: (
+    primary: (
+        high: #0057B2,
+        medium: #12559B,
+        light: #50D4B7,
+        dim: #8BC4C6,
+    ),
+    secondary: (
+        high: #0E78BD,
+        medium: #007CFF,
+        light: #4A97E8,
+        dim: #486F99,
+    ),
+    tertiary: (
+        high: #E8AE4A,
+        medium: #FFAA19,
+        light: #FFA100,
+        dim: #FFC96B,
+    )
+);
+
+/**
+    @VARIABLES FOR: FONTS
+**/
+$font-size-default: 1.6rem;
+
+

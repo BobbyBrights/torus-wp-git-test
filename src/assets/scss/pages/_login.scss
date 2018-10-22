@@ -1,0 +1,65 @@
+.v-login {
+  height: 700px;
+}
+
+.login-container {
+  &__login {
+    // background: #f7f7f7;
+    // border: 1px solid #dedede;
+    // box-shadow: 4px 4px 1rem #dedede;
+    // padding: .2rem 2rem;
+  }
+
+  &__logo {
+    max-width: 100%;
+  }
+
+  & .login__link {
+    display: block;
+    // font-size: 14px;
+    font-size: 12px;
+    margin-bottom: .4rem;
+  }
+
+  & .contact__link{
+    font-size: 12px;
+  }
+
+  & .login-success__icon {
+    display: none;
+  }
+
+  & .ng-valid+.login-success__icon {
+    color: $color-link;
+    display: block;
+    position: absolute;
+    right: -25px;
+    top: 34px;
+    font-size: 18px;
+  }
+
+  & .login-failure__text {
+    display: block;
+    position: absolute;
+    right: -70px;
+    top: 32px;
+    padding: 0.5em;
+    background: $danger;
+    color: $color-white;
+    border-radius: 4px;
+
+    &::after {
+      position: absolute;
+      content: " ";
+      border-top: 15px solid $danger;
+      border-right: 15px solid transparent;
+      transform: rotate(-45deg);
+      left: -3px;
+      top: 10px;
+    }
+  }
+}
+
+.error_class {
+  border: 1px solid $danger;
+}

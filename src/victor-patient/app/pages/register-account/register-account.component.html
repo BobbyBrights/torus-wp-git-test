@@ -1,0 +1,394 @@
+<section class="v-registerAcc">
+  <app-header></app-header>
+  <div class="container med-w-container mt-3 mb-3 pb-2">
+
+    <div class="row pt-4 ">
+      <div class="col-12 text-center mb-2">
+        <!-- <img src="./assets/images/victor-horizontal-logo.png" /> -->
+        <h2>Registration</h2>
+      </div>
+      <div class="col-md-12">
+        <p class="text-black-50">
+          <!-- Welcome to Victor! Before using our platform, there are couple of info and questions that would need your
+          input. It won't
+          take you long. -->
+          Welcome to VICTOR&reg;. We understand the financial impact patients face following a motor vehicle accident.
+          Please help us, and your hospital, better assist you, by providing the information, below.
+        </p>
+      </div>
+    </div>
+
+    <h4 class="mt-3 mb-3">Patient Account Info</h4>
+    <form #registerAccForm="ngForm">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">FIRST NAME
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input required #firstName="ngModel" (keypress)="validation.allowOnlyString($event)" [(ngModel)]="registerAcc.FirstName"
+              name="firstName" type="text" maxlength="25" class="form-control">
+            <p class="mt-2 v-error" *ngIf="firstName.invalid &&  (firstName.dirty || firstName.touched)">
+              Please enter patient's first name
+            </p>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">MIDDLE NAME</label>
+
+            <input #middleName="ngModel" (keypress)="validation.allowOnlyString($event)" [(ngModel)]="registerAcc.middleName"
+              name="middleName" type="text" maxlength="25" class="form-control">
+            <p class="mt-2 v-error" *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)">
+              Please enter patient's middle name
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">LAST NAME
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input required #lastName="ngModel" (keypress)="validation.allowOnlyString($event)" [(ngModel)]="registerAcc.LastName"
+              name="lastName" type="text" maxlength="35" class="form-control">
+            <p class="mt-2 v-error" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+              Please enter patient's last name
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom mb-2"></div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">STREET ADDRESS
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input required #streetAddress="ngModel" [(ngModel)]="registerAcc.streetAddress" minlength="1" maxlength="35"
+              name="streetAddress" type="text" class="form-control">
+            <!-- <p class="mt-2 v-error" *ngIf="streetAddress.invalid && (streetAddress.dirty || streetAddress.touched)">
+              Please type the street address
+            </p> -->
+            <div class="form-control-feedback" *ngIf="streetAddress.errors && (streetAddress.dirty || streetAddress.touched)">
+              <p class="mt-2 v-error" *ngIf="streetAddress?.errors?.required">Street Address is required</p>
+              <p class="mt-2 v-error" *ngIf="streetAddress?.errors?.minlength">Street Address must contain at least the
+                1 character</p>
+              <p class="mt-2 v-error" *ngIf="streetAddress?.errors?.maxlength">Street Address can contain maximum of 35
+                characters
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">ZIP CODE
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input required #zipCode="ngModel" [(ngModel)]="registerAcc.ZIPCode" (ngModelChange)="getZipInfo()"
+              (keypress)="validation.allowOnlyNumber($event)" name="zipCode" type="text" class="form-control" minlength="5"
+              maxlength="10">
+
+            <div class="form-control-feedback" *ngIf="zipCode.errors && (zipCode.dirty || zipCode.touched)">
+              <p class="mt-2 v-error" *ngIf="zipCode?.errors?.required">Zip Code is required</p>
+              <p class="mt-2 v-error" *ngIf="zipCode?.errors?.minlength">Zip Code must contain at least the 5
+                characters
+              </p>
+              <p class="mt-2 v-error" *ngIf="zipCode?.errors?.maxlength">Zip Code can contain maximum of 9 characters</p>
+            </div>
+
+            <div class="form-control-feedback" *ngIf="zipCodeError">
+              <p class="mt-2 v-error">Zip code is not valid </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="selectbox form-group">
+            <label class="form-label">STATE
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <app-autocomplete name="'state'" [isDisabled]="true" [(ngModel)]="registerAcc.State.StateAbbreviation"
+              required [isRequired]="'true'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteStateLoader"
+              [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states" (onSelect)="setState($event)"
+              [modelProperty]="'StateAbbreviation'"></app-autocomplete>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">CITY
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <app-autocomplete name="'city'" [isDisabled]="cities.length == 0" [(ngModel)]="registerAcc.City.CityName"
+              required [isRequired]="'true'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteCityLoader"
+              [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities" (onSelect)="setCity($event)"
+              [modelProperty]="'CityName'"></app-autocomplete>
+
+            <!-- <input required #city="ngModel" [(ngModel)]="registerAcc.City" name="city" type="text" class="form-control" minlength="1"
+              maxlength="25" (keypress)="validation.allowOnlyString($event)">
+            <div class="form-control-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+              <p class="mt-2 v-error" *ngIf="city?.errors?.required">City is required</p>
+              <p class="mt-2 v-error" *ngIf="city?.errors?.minlength">City must contain at least the 1 character</p>
+              <p class="mt-2 v-error" *ngIf="city?.errors?.maxlength">City can contain maximum of 25 characters</p>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">TELEPHONE 1</label>
+            <input #telephone1="ngModel" [(ngModel)]="registerAcc.telePhone1.number" placeholder="000-000-0000"
+              (ngModelChange)="registerAcc.telePhone1.number = maskTelephone(registerAcc.telePhone1.number)" name="telephone1"
+              type="text" (keypress)="validation.allowOnlyNumber($event)" class="form-control" maxlength="12" minlength="12">
+            <div class="form-control-feedback" *ngIf="telephone1.invalid && (telephone1.dirty || telephone1.touched)">
+              <p class="mt-2 v-error" *ngIf="telephone1?.errors?.minlength">Telephone must contain at least the 12
+                characters
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="selectbox form-group">
+            <label class="form-label">TYPE
+              <sup class="v-required-sup" *ngIf="(registerAcc.telePhone1.number?.length > 0) ? true : false">*</sup>
+            </label>
+            <select [required]="(registerAcc.telePhone1.number?.length > 0) ? true : false" #tlType1="ngModel"
+              [(ngModel)]="registerAcc.telePhone1.type" name="tlType1" class="form-control custom-select">
+              <option value="" selected>Select Type</option>
+              <option value="MobileOne">Mobile 1</option>
+              <option value="MobileTwo">Mobile 2</option>
+              <option value="HomeOne">Home 1</option>
+              <option value="HomeTwo">Home 2</option>
+              <option value="WorkOne">Work 1</option>
+              <option value="WorkTwo">Work 2</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="form-control-feedback" *ngIf="tlType1.invalid && (tlType1.dirty || tlType1.touched)">
+              <p class="mt-2 v-error" *ngIf="tlType1?.errors?.required">
+                Telephone type is required
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">TELEPHONE 2</label>
+            <input #telephone2="ngModel" [(ngModel)]="registerAcc.telePhone2.number" (ngModelChange)="registerAcc.telePhone2.number = maskTelephone(registerAcc.telePhone2.number)"
+              (keypress)="validation.allowOnlyNumber($event)" maxlength="12" placeholder="000-000-0000" name="telephone2"
+              type="text" minlength="12" class="form-control">
+            <div class="form-control-feedback" *ngIf="telephone2.invalid && (telephone2.dirty || telephone2.touched)">
+              <p class="mt-2 v-error" *ngIf="telephone2?.errors?.minlength">Telephone must contain at least the 12
+                characters
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="selectbox form-group">
+            <label class="form-label">TYPE
+              <sup class="v-required-sup" *ngIf="(registerAcc.telePhone2.number?.length > 0) ? true : false">*</sup>
+            </label>
+            <select [required]="(registerAcc.telePhone2.number?.length > 0) ? true : false" #tlType2="ngModel"
+              [(ngModel)]="registerAcc.telePhone2.type" name="tlType2" class="form-control custom-select">
+              <option value="" selected>Select Type</option>
+              <option value="MobileOne">Mobile 1</option>
+              <option value="MobileTwo">Mobile 2</option>
+              <option value="HomeOne">Home 1</option>
+              <option value="HomeTwo">Home 2</option>
+              <option value="WorkOne">Work 1</option>
+              <option value="WorkTwo">Work 2</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="form-control-feedback" *ngIf="tlType2.invalid && (tlType2.dirty || tlType2.touched)">
+              <p class="mt-2 v-error" *ngIf="tlType2?.errors?.required">
+                Telephone type is required
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="date form-group">
+            <label class="form-label">DATE OF BIRTH
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <!-- <input required #dateOfBirth="ngModel" [(ngModel)]="registerAcc.DateofBirth" name="dateOfBirth" type="date" (ngModelChange)="validation.checkDob(registerAcc.DateofBirth,18)"
+              [ngClass]="{'v-error-input': !validation.checkDob(registerAcc.DateofBirth,18)}" class="form-control"> -->
+            <input [bsConfig]="bsConfig" type="text" required #dateOfBirth="ngModel" [(ngModel)]="registerAcc.DateofBirth"
+              class="form-control" [ngClass]="{'v-error-input': !validation.checkDob(registerAcc.DateofBirth,18)}" name="dateOfBirth"
+              (ngModelChange)="dateOfBirthChange($event)" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+
+            <!-- <p class="mt-2 v-error" *ngIf="dateOfBirth.touched && !validation.checkDob(registerAcc.DateofBirth,18)">
+              <span *ngIf="dateOfBirth?.errors?.required; else above18"> Date of Birth is required</span>
+              <ng-template #above18>
+                <span *ngIf="!validation.checkDob(registerAcc.DateofBirth,18)"> patient's age should be above 18</span>
+              </ng-template>
+
+            </p> -->
+
+            <p class="mt-2 v-error">
+              <span *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"> Date of Birth is
+                required</span>
+              <span *ngIf="registerAcc.DateofBirth && dateOfBirth.touched && !validation.checkDob(registerAcc.DateofBirth,18)">
+                patient's age should be above 18</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="selectbox form-group">
+            <label class="form-label">GENDER
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select required #gender="ngModel" [(ngModel)]="registerAcc.Gender" name="gender" class="form-control custom-select">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <p class="mt-2 v-error" *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+              Please select patient's gender
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom mb-2"></div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">SOCIAL SECURITY NUMBER
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input required #ssn="ngModel" [(ngModel)]="registerAcc.SocialSecurityNo" (keypress)="validation.allowOnlyNumber($event)"
+              (ngModelChange)="maskSSN()" [ngClass]="{'v-error-input': !maskSSN()}" maxlength="11" placeholder="XXX-XX-XXXX"
+              name="ssn" type="text" class="form-control">
+            <p class="mt-2 v-error" *ngIf="(ssn.touched && !maskSSN())">
+              Please enter patient's social security number
+            </p>
+
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="textbox form-group">
+            <label class="form-label">EMAIL
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input #email="ngModel" [(ngModel)]="registerAcc.Email" name="email" [email]="true" type="email" class="form-control"
+              maxlength="25">
+            <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+              <p class="mt-2 v-error" *ngIf="email?.errors?.maxlength">Email can contain maximum of 25 characters</p>
+              <p class="mt-2 v-error" *ngIf="email?.errors?.email">Incorrect email format</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+          <div class="selectbox form-group">
+            <label class="form-label">HOSPITAL</label>
+            <select #hospital="ngModel" [(ngModel)]="registerAcc.Hospital" name="hospital" class="form-control custom-select">
+              <option value="EMORY_HOSP">Emory University Hospital</option>
+              <option value="NORTHSIDE_HOSP_ATLANTA">Northside Hospital - Atlanta</option>
+              <option value="NORTHSIDE_HOSP_FORSYTH">Northside Hospital - Forsyth</option>
+              <option value="NORTHSIDE_HOSP_DOCTORS_CENTER">Northside Hospital Doctors Center</option>
+              <option value="GRADY_HEALTH_SYSTEM">Grady Health System</option>
+            </select>
+            <p class="mt-2 v-error" *ngIf="hospital.invalid && (hospital.dirty || hospital.touched)">
+              Please select the hospital
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <div *ngIf="dateOfBirth.valid && validation.checkDob(registerAcc.DateofBirth,18)" class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="over18yearsold" required name="over18yearsold"
+                [(ngModel)]="registerAcc.AgeConfirmation">
+              <label class="custom-control-label" for="over18yearsold">I am over 17 years of age
+                <sup class="v-required-sup">*</sup>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row mt-3">
+        <div class="col-12 col-sm-6 col-md-12  text-center">
+          <button type="submit" (click)="navigate()" [disabled]="registerAccForm.form.invalid" class="btn btn-primary btn-semi-circle pl-4 pr-4">Register</button>
+        </div>
+      </div> -->  
+      <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-12  text-left">
+          <div class="row justify-content-center">
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="navigate('HOME')" class="btn btn-primary btn-semi-circle pl-4 pr-4">Home</button>
+            </div>
+
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" [disabled]="registerAccForm.form.invalid" (click)="navigate('REGISTER')" class="btn btn-success btn-semi-circle pl-4 pr-4">
+                Register</button>
+            </div>
+          </div>
+        </div>
+        <!-- [disabled]="registerAccForm.form.invalid" -->
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="modal fade" id="RegisterSuccessModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+  aria-labelledby="RegisterSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RegisterSuccessModalLabel">Your User ID and Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p [ngClass]="{'alert alert-danger': !regStatus}">{{message}}</p>
+        <div class="alert alert-success" *ngIf="regStatus">
+          <p>
+            <span class="font-weight-bold mr-2">USER ID:</span> {{ userRegData.USERID }}</p>
+          <p>
+            <span class="font-weight-bold mr-2">PASSWORD:</span> {{ userRegData.PASSWORD }}</p>
+        </div>
+        <p>Check your email inbox for a copy of this information.</p>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="regStatus" type="button" data-dismiss="modal" (click)="router.navigate(['pages/patient-survey-one'])"
+          class="btn btn-secondary">Next</button>
+        <button *ngIf="!regStatus" type="button" data-dismiss="modal" class="btn btn-secondary">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+<app-dialog (success)="onSuccessPopup()" (failure)="dialogService.hidePopup()"></app-dialog>
+<app-loader [loaderText]="loadingText" [showLoader]="showLoader"></app-loader>

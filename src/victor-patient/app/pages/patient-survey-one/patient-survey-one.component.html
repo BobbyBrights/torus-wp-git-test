@@ -1,0 +1,374 @@
+<section class="v-accident-data mb-5">
+  <app-header></app-header>
+  <form #accDataForm="ngForm">
+    <div class="container med-w-container mt-3 mb-3 pb-2">
+
+      <div class="p-4">
+        <h2 class="mb-2">
+          Patient Survey
+        </h2>
+      </div>
+      <!-- <div class="row">
+        <div class="col-12 col-md-12">
+          <h5>
+            Welcome to Victor!
+          </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <p class="text-black-50">
+            If you have been injured in a motor vehicle accident, please answer the following screening question to
+            assist the hospital
+            in properly procedding the bill and identify the appropriate payment methods. By answering as accurately
+            and
+            completely as possible, it will give us the best chance to avoid bill processing errors.
+          </p>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Is your visit to the hospital today the result of a motor vehicle accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <div class="d-flex">
+              <div class="mr-5 custom-control custom-radio">
+                <input required #MotorVehicleAccident="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.MotorVehicleAccident"
+                  value="true" id="MotorVehicleAccidentYes" type="radio" name="MotorVehicleAccident">
+                <label class="custom-control-label" for="MotorVehicleAccidentYes">Yes</label>
+              </div>
+              <div class="ml-5 custom-control custom-radio">
+                <input required class="custom-control-input" [(ngModel)]="accDataOne.MotorVehicleAccident" value="false"
+                  type="radio" id="MotorVehicleAccidentNo" name="MotorVehicleAccident">
+                <label for="MotorVehicleAccidentNo" class="custom-control-label">No</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="MotorVehicleAccident.invalid && (MotorVehicleAccident.dirty || MotorVehicleAccident.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Were you injured in the motor vehicle accident? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class="mr-5 custom-control custom-radio">
+                <input required #IsInjured="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.IsInjured"
+                  value="true" id="IsInjuredYes" type="radio" name="IsInjured">
+                <label class="custom-control-label" for="IsInjuredYes">Yes</label>
+              </div>
+              <div class="ml-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.IsInjured" value="false" type="radio" id="IsInjuredNo"
+                  name="IsInjured">
+                <label for="IsInjuredNo" class="custom-control-label">No</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="IsInjured.invalid && (IsInjured.dirty || IsInjured.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select whether you were a driver, passenger, pedestrian or bicyclist in the motor vehicle
+              accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select class="form-control custom-select" [(ngModel)]="accDataOne.PatientCommuterType" name="PatientCommuterType"
+              required #PatientCommuterType="ngModel">
+              <option value="" class="d-none">Select </option>
+              <option value="driver">Driver</option>
+              <option value="passenger">Passenger</option>
+              <option value="pedestrian">Pedestrian</option>
+              <option value="bicyclist">Bicyclist</option>
+            </select>
+            <p class="mt-2 v-error" *ngIf="PatientCommuterType.invalid && (PatientCommuterType.dirty || PatientCommuterType.touched)">
+              Please select how user involved in motor vehicle accident
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Was the motor vehicle accident the other driver's fault? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #OtherDriverFault="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.OtherDriverFault"
+                  value="true" id="OtherDriverFaultYes" type="radio" name="OtherDriverFault">
+                <label class="custom-control-label" for="OtherDriverFaultYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.OtherDriverFault" value="false" type="radio"
+                  id="OtherDriverFaultNo" name="OtherDriverFault">
+                <label for="OtherDriverFaultNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.OtherDriverFault" value="notsure" type="radio"
+                  id="OtherDriverFaultNotSure" name="OtherDriverFault">
+                <label for="OtherDriverFaultNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="OtherDriverFault.invalid && (OtherDriverFault.dirty || OtherDriverFault.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select how many vehicles were in the motor vehicle accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select class="form-control custom-select" [(ngModel)]="accDataOne.NoofAccidentVehicles" name="NoofAccidentVehicles"
+              required #NoofAccidentVehicles="ngModel">
+              <option value="" class="d-none">Select </option>
+              <option value="None">None</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4+">4+</option>
+              <!-- <option *ngFor="let num of comboNumbers" [ngValue]="num">{{ num }}</option> -->
+            </select>
+            <p class="mt-2 v-error" *ngIf="NoofAccidentVehicles.invalid && (NoofAccidentVehicles.dirty || NoofAccidentVehicles.touched)">
+              Please select no of vehicles involved in motor vehicle accident
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did the other driver leave the scene before the police arrived? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #HitandRunAccident="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.HitandRunAccident"
+                  value="true" id="HitandRunAccidentYes" type="radio" name="HitandRunAccident">
+                <label class="custom-control-label" for="HitandRunAccidentYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.HitandRunAccident" value="false" type="radio"
+                  id="HitandRunAccidentNo" name="HitandRunAccident">
+                <label for="HitandRunAccidentNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.HitandRunAccident" value="notsure" type="radio"
+                  id="HitandRunAccidentNotSure" name="HitandRunAccident">
+                <label for="HitandRunAccidentNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="HitandRunAccident.invalid && (HitandRunAccident.dirty || HitandRunAccident.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did the motor vehicle accident involve a vehicle malfunction of any kind? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #vehilceMalfuntion="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.VehicleMalfunction"
+                  value="true" id="vehilceMalfuntionYes" type="radio" name="vehilceMalfuntion">
+                <label class="custom-control-label" for="vehilceMalfuntionYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.vehilceMalfuntion" value="false" type="radio"
+                  id="vehilceMalfuntionNo" name="vehilceMalfuntion">
+                <label for="vehilceMalfuntionNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.vehilceMalfuntion" value="notsure" type="radio"
+                  id="vehilceMalfuntionNotSure" name="vehilceMalfuntion">
+                <label for="vehilceMalfuntionNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="vehilceMalfuntion.invalid && (vehilceMalfuntion.dirty || vehilceMalfuntion.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did the motor vehicle accident involve a tractor trailer, a large industrial vehicle, or corporate vehicle of
+              any kind? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #CorporateVehicle="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.CorporateVehicle"
+                  value="true" id="CorporateVehicleYes" type="radio" name="CorporateVehicle">
+                <label class="custom-control-label" for="CorporateVehicleYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.CorporateVehicle" value="false" type="radio"
+                  id="CorporateVehicleNo" name="CorporateVehicle">
+                <label for="CorporateVehicleNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.CorporateVehicle" value="notsure" type="radio"
+                  id="CorporateVehicleNotSure" name="CorporateVehicle">
+                <label for="CorporateVehicleNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="CorporateVehicle.invalid && (CorporateVehicle.dirty || CorporateVehicle.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Was the other vehicle a city or government vehicle of any kind? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #GovermentVehicle="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.GovermentVehicle"
+                  value="true" id="GovermentVehicleYes" type="radio" name="GovermentVehicle">
+                <label class="custom-control-label" for="GovermentVehicleYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.GovermentVehicle" value="false" type="radio"
+                  id="GovermentVehicleNo" name="GovermentVehicle">
+                <label for="GovermentVehicleNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.GovermentVehicle" value="notsure" type="radio"
+                  id="GovermentVehicleNotSure" name="GovermentVehicle">
+                <label for="GovermentVehicleNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="GovermentVehicle.invalid && (GovermentVehicle.dirty || GovermentVehicle.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did the motor vehicle accident occur in a construction zone? </label> <sup class="v-required-sup">*</sup>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #AccidentOccurZone="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccurZone"
+                  value="true" id="AccidentOccurZoneYes" type="radio" name="AccidentOccurZone">
+                <label class="custom-control-label" for="AccidentOccurZoneYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccurZone" value="false" type="radio"
+                  id="AccidentOccurZoneNo" name="AccidentOccurZone">
+                <label for="AccidentOccurZoneNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccurZone" value="notsure" type="radio"
+                  id="AccidentOccurZoneNotSure" name="AccidentOccurZone">
+                <label for="AccidentOccurZoneNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="AccidentOccurZone.invalid && (AccidentOccurZone.dirty || AccidentOccurZone.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did the motor vehicle accident occur from a road defect? </label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input  #AccidentOccurZone="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccuredOfRoadDefect"
+                  value="true" id="AccidentOccuredOfRoadDefectYes" type="radio" name="AccidentOccuredOfRoadDefect">
+                <label class="custom-control-label" for="AccidentOccuredOfRoadDefectYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccuredOfRoadDefect" value="false" type="radio"
+                  id="AccidentOccuredOfRoadDefectNo" name="AccidentOccuredOfRoadDefect">
+                <label for="AccidentOccuredOfRoadDefectNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.AccidentOccuredOfRoadDefect" value="notsure" type="radio"
+                  id="AccidentOccuredOfRoadDefectNotSure" name="AccidentOccuredOfRoadDefect">
+                <label for="AccidentOccuredOfRoadDefectNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <!-- <p class="mt-2 v-error" *ngIf="AccidentOccuredOfRoadDefect.invalid && (AccidentOccuredOfRoadDefect.dirty || AccidentOccuredOfRoadDefect.touched)">
+              This field is required
+            </p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Were you performing some type of employment responsibility or work related task at the time of the
+              motor vehicle accident? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class=" custom-control custom-radio">
+                <input required #EmployementTask="ngModel" class="custom-control-input" [(ngModel)]="accDataOne.EmployementTask"
+                  value="true" id="EmployementTaskYes" type="radio" name="EmployementTask">
+                <label class="custom-control-label" for="EmployementTaskYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.EmployementTask" value="false" type="radio"
+                  id="EmployementTaskNo" name="EmployementTask">
+                <label for="EmployementTaskNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="accDataOne.EmployementTask" value="notsure" type="radio"
+                  id="EmployementTaskNotSure" name="EmployementTask">
+                <label for="EmployementTaskNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="EmployementTask.invalid && (EmployementTask.dirty || EmployementTask.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-12  text-left">
+          <div class="row justify-content-center">
+            <!-- <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="navigate('PREV')" class="btn btn-primary btn-semi-circle pl-4 pr-4">Previous
+              </button>
+            </div> -->
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="exitPopup()" class="btn btn-outline-dark btn-semi-circle pl-4 pr-4">
+                Quit </button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="saveAndReturnPopup()" class="btn btn-primary btn-semi-circle pl-4 pr-4">
+                Save & Exit </button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button [disabled]="accDataForm.form.invalid" type="button" (click)="navigate('NEXT')" class="btn btn-success btn-semi-circle pl-4 pr-4">
+                Continue </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>
+<app-footer></app-footer>
+<app-dialog (success)="onSuccessPopup()" (failure)="dialogService.hidePopup()"></app-dialog>
+<app-loader [loaderText]="loadingText" [showLoader]="showLoader"></app-loader>

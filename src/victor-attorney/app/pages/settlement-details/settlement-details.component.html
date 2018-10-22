@@ -1,0 +1,229 @@
+<section class="v-attorney_settlement-details u-min-700 pt-4 mt-1 mb-5">
+
+  <div class="container u-height-medvh d-flex flex-column justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10">
+        <h3 class="text-center mb-2">Settlement Details</h3>
+        <!-- <h5 class="text-center mb-5">Client's Personal Info</h5> -->
+        <form [formGroup]="settlementDetailsForm" (ngSubmit)="saveSettlementDetails()">
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <h5>Client's Personal Info</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="FirstName" class="form-label">FIRST NAME</label>
+                <input class="form-control u-form-control-pad" type="text"  maxlength="15" (keypress)="validation.allowOnlyString($event)" name="FirstName" id="FirstName"
+                  formControlName="FirstName">
+                  <div class="form-feedback" *ngIf="settlementDetailsFormControls?.FirstName?.invalid && (settlementDetailsFormControls?.FirstName.dirty || settlementDetailsFormControls?.FirstName?.touched)">
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.FirstName?.errors?.required">FIRSTNAME IS
+                        REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.FirstName?.errors?.maxlength">
+                        Maximum 25 LETTERS</p>
+                    </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="MiddleName" class="form-label">MIDDLE NAME </label>
+                <input class="form-control u-form-control-pad" type="text"  maxlength="15" (keypress)="validation.allowOnlyString($event)" name="MiddleName" id="MiddleName"
+                  formControlName="MiddleName">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="LastName" class="form-label"> LAST NAME</label>
+                <input class="form-control u-form-control-pad" type="text"  maxlength="25" (keypress)="validation.allowOnlyString($event)" name="LastName" id="LastName"
+                  formControlName="LastName">
+                  <div class="form-feedback" *ngIf="settlementDetailsFormControls?.LastName?.invalid && (settlementDetailsFormControls?.LastName.dirty || settlementDetailsFormControls?.LastName?.touched)">
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.LastName?.errors?.required">LASTNAME IS
+                        REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.LastName?.errors?.maxlength">
+                        Maximum 35 LETTERS</p>
+                    </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="PhoneNumber" class="form-label"> PHONE NUMBER</label>
+                <input class="form-control u-form-control-pad" type="text" minlength="12" maxlength="12"  (keypress)="validation.allowOnlyNumber($event)" name="PhoneNumber" id="PhoneNumber"
+                  formControlName="PhoneNumber">
+                  <div class="form-feedback" *ngIf="settlementDetailsFormControls?.PhoneNumber?.invalid && (settlementDetailsFormControls?.PhoneNumber.dirty || settlementDetailsFormControls?.PhoneNumber?.touched)">
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.PhoneNumber?.errors?.required">PHONE NUMBER IS
+                        REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.PhoneNumber?.errors?.minlength">
+                        Minimum 12 numbers</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.PhoneNumber?.errors?.maxlength">
+                        Maximum 12 numbers</p>
+                    </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="StreetAddress" class="form-label">STREET ADDRESS</label>
+                <input class="form-control u-form-control-pad" type="text" minlength="1" maxlength="35" name="StreetAddress" id="StreetAddress"
+                  formControlName="StreetAddress">
+                  <div class="form-feedback" *ngIf="settlementDetailsFormControls?.StreetAddress?.invalid && (settlementDetailsFormControls?.StreetAddress.dirty || settlementDetailsFormControls?.StreetAddress?.touched)">
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.StreetAddress?.errors?.required">STREET ADDRESS IS
+                        REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.StreetAddress?.errors?.minlength">
+                        Minimum 1 LETTER</p>
+                      <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.StreetAddress?.errors?.maxlength">
+                        Maximum 35 LETTERS</p>
+                    </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="Zip" class="form-label">ZIP</label>
+                <input class="form-control u-form-control-pad" type="text" minlength="5" maxlength="10" (keypress)="validation.allowOnlyNumber($event)" name="Zip" id="Zip" formControlName="Zip">
+                <div class="form-feedback" *ngIf="settlementDetailsFormControls?.Zip?.invalid && (settlementDetailsFormControls?.Zip.dirty || settlementDetailsFormControls?.Zip?.touched)">
+                    <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.Zip?.errors?.required">ZIP IS
+                      REQUIRED</p>
+                    <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.Zip?.errors?.minlength">
+                      Minimum 5 LETTERS</p>
+                    <p class="mt-2 v-error" *ngIf="settlementDetailsFormControls?.Zip?.errors?.maxlength">
+                      Maximum 10 LETTERS</p>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="State" class="form-label">STATE </label>
+                <app-autocomplete name="'state'" [isDisabled]="true" [formCtrlName]="'State'" [autoForm]="settlementDetailsForm"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteStateLoader"
+                [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states"
+                [modelProperty]="'StateAbbreviation'"></app-autocomplete>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="City" class="form-label"> CITY</label>
+
+                <app-autocomplete name="'city'" [isDisabled]="cities.length == 0" [formCtrlName]="'City'" [autoForm]="settlementDetailsForm"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteCityLoader"
+                [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities" 
+                [modelProperty]="'CityName'"></app-autocomplete>
+  
+              </div>
+            </div>
+  
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="ClientInfo" class="form-label">IS YOUR CLIENT INFORMATION CORRECT ? </label>
+                <div class="d-flex">
+                  <div class="mr-5 custom-control custom-radio">
+                    <input class="custom-control-input" value="true" formControlName="isClientInfo" (change)="togglePatientInfo('disable')" id="ClientInfoCorrectYes" type="radio" name="ClientInfoCorrect">
+                    <label class="custom-control-label" for="ClientInfoCorrectYes">Yes</label>
+                  </div>
+                  <div class="ml-5 custom-control custom-radio">
+                    <input class="custom-control-input" value="false" formControlName="isClientInfo" (change)="togglePatientInfo('enable')" type="radio" id="ClientInfoCorrectNo" name="ClientInfoCorrect">
+                    <label for="ClientInfoCorrectNo" class="custom-control-label">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="SettlementDate" class="form-label">ENTER DATE OF SETTLEMENT</label>
+                <input [bsConfig]="bsConfig" formControlName="SettlementDate" name="SettlementDate" id="SettlementDate"
+                  type="text" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+
+              <div class="form-group">
+                <label for="SettlementAmount" class="form-label">GROSS SETTLEMENT AMOUNT </label>
+                <input class="form-control u-form-control-pad" type="text" name="SettlementAmount" id="SettlementAmount"
+                  formControlName="SettlementAmount">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for="TotalMedicals" class="form-label">TOTAL MEDICALS </label>
+                <input class="form-control u-form-control-pad" type="text" name="TotalMedicals" id="TotalMedicals"
+                  formControlName="TotalMedicals">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-2"></div>
+            <!-- <div class="col-12 col-md-10">
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <label class="custom-control-label" for="SettlementCheckBox">
+                    ALTHOUGH MY CLIENT (THE PATIENT) HAS AUTHROIZED ME TO RELEASE SETTLEMENT DETAILS, I REFUSE TO DO SO
+                    BY
+                    CHECKING THIS BOX AND REFUSING TO PROVIDE SETTLEMENT DETAILS, I UNDERSTAND THIS MAY PREVENT MY
+                    CLIENT
+                    (THE PATIENT) FROM RECEIVING A VICTOR REBATE CHECK.
+                  </label>
+                  <input type="checkbox" class="custom-control-input" name="SettlementCheckBox" id="SettlementCheckBox"
+                    formControlName="SettlementCheckBox">
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 col-md-10">
+              <label>
+                ALTHOUGH MY CLIENT (THE PATIENT) HAS AUTHROIZED ME TO RELEASE SETTLEMENT DETAILS, I REFUSE TO DO SO
+                BY
+                CHECKING THIS BOX AND REFUSING TO PROVIDE SETTLEMENT DETAILS, I UNDERSTAND THIS MAY PREVENT MY CLIENT
+                (THE PATIENT) FROM RECEIVING A VICTOR REBATE CHECK.
+              </label>
+              <input class="" type="checkbox" name="SettlementCheckBox" id="SettlementCheckBox">
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-12 col-md-4 text-right">
+              <input class="btn btn-secondary btn-semi-circle text-warning p-1 u-text-small" type="button" value="PRINT PAYMENT VOUCHER">
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-2 text-center mt-2">
+              <div class="form-group">
+                <input class="btn btn-primary btn-semi-circle" type="submit" value="Save">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-loader [loaderText]="loadingText" [showLoader]="showLoader"></app-loader>
+<app-dialog (success)="dialogService.changePopupRoute('pages/cases')" (failure)="dialogService.hidePopup()"></app-dialog>

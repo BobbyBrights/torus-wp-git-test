@@ -1,0 +1,102 @@
+<section class="v-registerAcc mb-5">
+  <app-header></app-header>
+  <div class="container med-w-container pb-2 mt-3 mb-3">
+
+    <div class="row pt-4">
+      <!-- <div class="col-12 text-center">
+        <img src="./assets/images/victor-horizontal-logo.png" />
+      </div> -->
+      <div class="col-12 col-md-12 text-center">
+        <h2 class="mb-2">Documents to Sign</h2>
+        <p class="text-black-50">
+          Congratulations! Based on your answers. Victor may be able to help you. In order for us to make an accurate
+          assessment of
+          your hospital encounter we will need you to sign a release of information.
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <p>
+          This release will allow us to obtain copies
+        </p>
+        <ul>
+          <li>The Medical Bill for this visit</li>
+          <li>The Accident Report from the responding law enforcement authority</li>
+          <li>Auto Accident Policy information from your insurance compony</li>
+          <li>Auto Accident Policy information from the at-fault party's insurance company</li>
+          <li>Copy of the Lien the hospital may file against the at-fault party's insurance funds</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="d-flex flex-column justify-content-center col-12 col-sm-12 col-md-12">
+        <p>Watch this brief video for a better understanding of these releases</p>
+        <p class="mt-1">
+          <a href="#" (click)="generateDocument($event)">Click here</a> to create and sign the Release of Information</p>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-12">
+        <p>Should your hospital account qualify your hospital account will be purchased. This will prevent collection
+          activities
+          for your hospital account. The purchaser will be paid from your settlement</p>
+        <p>
+          <a href="#">Click here</a> to sign for your agreement to the hospital purchase of your account. ( This may
+          not
+          be necessary <span class="font-weight-bold text-danger">*</span> ) </p>
+      </div>
+    </div>
+    <!-- <div class="row mt-1">
+      <div class="d-flex flex-column justify-content-center col-12 col-sm-12 col-md-12">
+        <p>Watch this brief video for a better understanding of hospital debt purchases</p>
+       
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <textarea class="w-100" name="" id="" cols="30" rows="10">
+        </textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <!-- <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="termsAndConditions" name="termsAndConditions"
+              [(ngModel)]="termsAndConditions">
+            <label class="custom-control-label" for="termsAndConditions">Click here to review and sign the Victor Terms
+              and Conditions</label>
+          </div>
+        </div> -->
+
+        <p class="mt-4">
+          <a href="#">Click here</a> to review and sign the Victor Terms and Conditions
+        </p>
+      </div>
+    </div>
+    <div class="row mt-3">       
+      <div class="col-12 col-sm-12 col-md-12">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-3 col-md-3 p-1">
+            <button type="button" (click)="navigate('PREV')" class="btn btn-primary btn-semi-circle pl-4 pr-4">Previous</button>
+          </div>
+          <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+            <button type="button" (click)="exitPopup()" class="btn btn-outline-dark btn-semi-circle pl-4 pr-4">
+                Quit</button>
+          </div>
+          <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+            <button type="button" (click)="navigate('SAVE')" class="btn btn-primary btn-semi-circle pl-4 pr-4"> Save & Exit</button>
+          </div>
+          <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+            <button type="button" (click)="navigate('NEXT')" class="btn btn-success btn-semi-circle pl-4 pr-4">
+              Finish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
+<app-dialog (success)="onSuccessPopup()" (failure)="dialogService.hidePopup()"></app-dialog>
+<app-loader [showLoader]="showLoader"></app-loader>

@@ -1,0 +1,20 @@
+<div class="modal fade" id="appDialogModal" tabindex="-1" role="dialog" aria-labelledby="appDialogModalLabel" aria-hidden="true">
+  <!-- [ngStyle]="{'display': (show) ? 'block' : '' }"   [ngClass]="{'show': show}" -->
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="appDialogModalLabel">{{ popupConfig.popupHeader }}</h5>
+        <button type="button" class="close" (click)="onFailure()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      <div class="modal-body">
+        {{ popupConfig.popupMessage }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onSuccess()">{{ popupConfig.popupSuccessBtn}}</button>
+        <button *ngIf="popupConfig.popupFailureBtn && popupConfig.popupFailureBtn != ''" type="button" class="btn btn-secondary" (click)="onFailure()">{{ popupConfig.popupFailureBtn}}</button>
+      </div>
+    </div>
+  </div>
+</div>

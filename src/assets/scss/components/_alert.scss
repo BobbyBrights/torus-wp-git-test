@@ -1,0 +1,12 @@
+.v-alert {
+    background: linear-gradient(to left, $color-primary, $color-secondary) !important;
+    color: $color-white;
+
+    & strong {
+      font-weight: normal;
+    }
+
+    &__icon {
+        cursor: pointer;   
+    }
+}

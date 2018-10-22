@@ -1,0 +1,9 @@
+<div *ngIf="showTimer">
+<app-timer [show]="showTimer" [enableButton]="true" [counter]="60" [counterMsg]="'Your session is going to expire'"
+  (onContinue)="authentication.logout()"></app-timer>
+</div>
+
+<app-header [profilePic]="profilePic"></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-loader [showLoader]="showLoader"></app-loader>

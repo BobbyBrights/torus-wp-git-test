@@ -1,0 +1,597 @@
+<section class="v-injury mb-5">
+  <app-header></app-header>
+  <form #injuryForm="ngForm">
+    <div class="container med-w-container mt-3 mb-3 pb-2">
+      <!-- <div class="col-12 text-center">
+        <img src="./assets/images/victor-horizontal-logo.png" />
+      </div> -->
+      <div class="row">
+        <div class="col-12 text-center pt-4">
+          <h2 class="mb-2">Injury</h2>
+          <!-- <p class="text-black-50">
+            <span>Deadline : </span> |
+            <span>Total Completion : </span>
+          </p> -->
+        </div>
+      </div>
+      <h4 class="mt-4">INJURIES FROM THIS MOTOR VEHICLE ACCIDENT</h4>
+      <h6>SELECT ALL THAT APPLY</h6>
+      <!-- <p>Please click all body parts that you believe were injured in this motor vehicle accident.</p> -->
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechHead" name="thisWrechHead" [(ngModel)]="injuryData.thisWrech.Head"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechHead">Head</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechNeck" name="thisWrechNeck" [(ngModel)]="injuryData.thisWrech.Neck"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechNeck">Neck</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechNose" name="thisWrechNose" [(ngModel)]="injuryData.thisWrech.Nose"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechNose">Nose</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRibs" name="thisWrechRibs" [(ngModel)]="injuryData.thisWrech.Ribs"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRibs">Ribs/torso</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLowerback" name="thisWrechLowerback" [(ngModel)]="injuryData.thisWrech.Lowerback"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLowerback">Lower back</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechUpperBack" name="thisWrechUpperBack" [(ngModel)]="injuryData.thisWrech.UpperBack"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechUpperBack">Upper back</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftEye" name="thisWrechLeftEye" [(ngModel)]="injuryData.thisWrech.LeftEye"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftEye">Left eye</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightEye" name="thisWrechRightEye" [(ngModel)]="injuryData.thisWrech.RightEye"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightEye">Right eye</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftShoulder" name="thisWrechLeftShoulder" [(ngModel)]="injuryData.thisWrech.LeftShoulder"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftShoulder">Left shoulder</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightShoulder" name="thisWrechRightShoulder" [(ngModel)]="injuryData.thisWrech.RightShoulder"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightShoulder">Right shoulder</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftArm" name="thisWrechLeftArm" [(ngModel)]="injuryData.thisWrech.LeftArm"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftArm">Left arm</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightArm" name="thisWrechRightArm" [(ngModel)]="injuryData.thisWrech.RightArm"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightArm">Right arm</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftHand" name="thisWrechLeftHand" [(ngModel)]="injuryData.thisWrech.LeftHand"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftHand">Left hand/wrist</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightHand" name="thisWrechRightHand" [(ngModel)]="injuryData.thisWrech.RightHand"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightHand">Right hand/wrist</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftHip" name="thisWrechLeftHip" [(ngModel)]="injuryData.thisWrech.LeftHip"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftHip">Left hip/pelvis</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightHip" name="thisWrechRightHip" [(ngModel)]="injuryData.thisWrech.RightHip"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightHip">Right hip/pelvis</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftLeg" name="thisWrechLeftLeg" [(ngModel)]="injuryData.thisWrech.LeftLeg"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftLeg">Left leg</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightLeg" name="thisWrechRightLeg" [(ngModel)]="injuryData.thisWrech.RightLeg"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightLeg">Right leg</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftknee" name="thisWrechLeftknee" [(ngModel)]="injuryData.thisWrech.Leftknee"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftknee">Left knee</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightknee" name="thisWrechRightknee" [(ngModel)]="injuryData.thisWrech.Rightknee"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightknee">Right knee</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftFoot" name="thisWrechLeftFoot" [(ngModel)]="injuryData.thisWrech.LeftFoot"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftFoot">Left foot</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightFoot" name="thisWrechRightFoot" [(ngModel)]="injuryData.thisWrech.RightFoot"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightFoot">Right foot</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechLeftAnkle" name="thisWrechLeftAnkle" [(ngModel)]="injuryData.thisWrech.LeftAnkle"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechLeftAnkle">Left ankle</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechRightAnkle" name="thisWrechRightAnkle" [(ngModel)]="injuryData.thisWrech.RightAnkle"
+                (ngModelChange)="thisWrechChanged($event)">
+              <label class="custom-control-label" for="thisWrechRightAnkle">Right ankle</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="thisWrechNone" name="thisWrechNone" [(ngModel)]="injuryData.thisWrech.None"
+                (ngModelChange)="injuryData.thisWrech = {};injuryData.thisWrech.None = true">
+              <label class="custom-control-label" for="thisWrechNone">None</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+            <div class="form-group">
+              <!-- <label class="form-label" for="prevOtherInjury">Other</label> -->
+              <input type="text" placeholder="Other" [(ngModel)]="injuryData.thisWrech.other"  (ngModelChange)="thisWrechChanged($event)" class="form-control" name="thisWrechother" id="thisOtherInjury"/>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <h4 class="mt-4">PAST INJURIES</h4>
+            <h6>SELECT ALL THAT APPLY</h6>
+
+          <!-- <p>Please click all body parts that have been injured prior to this motor vehicle accident to the extent that medical treatment was
+            required
+          </p> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" (ngModelChange)="beforeWrechChanged($event)" id="beforeWrechHead" name="beforeWrechHead"
+                [(ngModel)]="injuryData.beforeWrech.Head">
+              <label class="custom-control-label" for="beforeWrechHead">Head</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechNeck" name="beforeWrechNeck" (ngModelChange)="beforeWrechChanged($event)"
+                [(ngModel)]="injuryData.beforeWrech.Neck">
+              <label class="custom-control-label" for="beforeWrechNeck">Neck</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechNose" name="beforeWrechNose" [(ngModel)]="injuryData.beforeWrech.Nose"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechNose">Nose</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRibs" name="beforeWrechRibs" [(ngModel)]="injuryData.beforeWrech.Ribs"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRibs">Ribs/torso</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLowerBack" name="beforeWrechLowerBack" [(ngModel)]="injuryData.beforeWrech.Lowerback"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLowerBack">Lower back</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechUpperBack" name="beforeWrechUpperBack" [(ngModel)]="injuryData.beforeWrech.UpperBack"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechUpperBack">Upper back</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftEye" name="beforeWrechLeftEye" [(ngModel)]="injuryData.beforeWrech.LeftEye"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftEye">Left eye</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightEye" name="beforeWrechRightEye" [(ngModel)]="injuryData.beforeWrech.RightEye"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightEye">Right eye</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftShoulder" name="beforeWrechLeftShoulder" [(ngModel)]="injuryData.beforeWrech.LeftShoulder"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftShoulder">Left shoulder</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightShoulder" name="beforeWrechRightShoulder" [(ngModel)]="injuryData.beforeWrech.RightShoulder"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightShoulder">Right shoulder</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftArm" name="beforeWrechLeftArm" [(ngModel)]="injuryData.beforeWrech.LeftArm"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftArm">Left arm</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightArm" name="beforeWrechRightArm" [(ngModel)]="injuryData.beforeWrech.RightArm"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightArm">Right arm</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftHand" name="beforeWrechLeftHand" [(ngModel)]="injuryData.beforeWrech.LeftHand"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftHand">Left hand/wrist</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightHand" name="beforeWrechRightHand" [(ngModel)]="injuryData.beforeWrech.RightHand"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightHand">Right hand/wrist</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftHip" name="beforeWrechLeftHip" [(ngModel)]="injuryData.beforeWrech.LeftHip"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftHip">Left hip/pelvis</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightHip" name="beforeWrechRightHip" [(ngModel)]="injuryData.beforeWrech.RightHip"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightHip">Right hip/pelvis</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftLeg" name="beforeWrechLeftLeg" [(ngModel)]="injuryData.beforeWrech.LeftLeg"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftLeg">Left leg</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightLeg" name="beforeWrechRightLeg" [(ngModel)]="injuryData.beforeWrech.RightLeg"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightLeg">Right leg</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftknee" name="beforeWrechLeftknee" [(ngModel)]="injuryData.beforeWrech.Leftknee"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftknee">Left knee</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightknee" name="beforeWrechRightknee" [(ngModel)]="injuryData.beforeWrech.Rightknee"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightknee">Right knee</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftFoot" name="beforeWrechLeftFoot" [(ngModel)]="injuryData.beforeWrech.LeftFoot"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftFoot">Left foot</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightFoot" name="beforeWrechRightFoot" [(ngModel)]="injuryData.beforeWrech.RightFoot"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightFoot">Right foot</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechLeftAnkle" name="beforeWrechLeftAnkle" [(ngModel)]="injuryData.beforeWrech.LeftAnkle"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechLeftAnkle">Left ankle</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechRightAnkle" name="beforeWrechRightAnkle" [(ngModel)]="injuryData.beforeWrech.RightAnkle"
+                (ngModelChange)="beforeWrechChanged($event)">
+              <label class="custom-control-label" for="beforeWrechRightAnkle">Right ankle</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="beforeWrechNone" name="beforeWrechNone" [(ngModel)]="injuryData.beforeWrech.None"
+                (ngModelChange)="injuryData.beforeWrech = {};injuryData.beforeWrech.None = true">
+              <label class="custom-control-label" for="beforeWrechNone">None</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-6">
+          <div class="form-group">
+            <!-- <label class="form-label" for="prevOtherInjury">Other</label> -->
+            <input type="text" placeholder="Other" [(ngModel)]="injuryData.beforeWrech.other" (ngModelChange)="beforeWrechChanged($event)" class="form-control" name="other" id="prevOtherInjury"/>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-12  text-left">
+          <div class="row">
+            <div class="col-12 col-sm-3 col-md-3  pl-4 pr-4 mb-2">
+              <button type="button" (click)="navigate('PREV')" class="btn btn-primary btn-semi-circle pl-4 pr-4">Previous</button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3  pl-4 pr-4 mb-2">
+              <button type="button" (click)="exitPopup()" class="btn btn-outline-dark btn-semi-circle pl-4 pr-4">Quit</button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3  pl-4 pr-4 mb-2">
+              <button type="button" (click)="saveAndReturnPopup()" class="btn btn-primary btn-semi-circle pl-4 pr-4">Save & Exit</button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3  pl-4 pr-4 mb-2">
+              <button [disabled]="injuryForm.form.invalid" type="button" (click)="navigate('NEXT')" class="btn btn-success btn-semi-circle pl-4 pr-4">Continue</button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </form>
+  <div class="modal fade" [ngClass]="{'show': showInjuryConfirmationPopup}" [ngStyle]="{'display': (showInjuryConfirmationPopup) ? 'block' : '' }"
+    id="injuryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+        <div class="modal-body">
+          You indicated you injured your {{ strSameInjuries }} in this motor vehicle accident for which you are currently seeking treatment.
+          You also indicated you had a {{ strSameInjuries }} injury prior to this motor vehicle accident. Was your previous
+          {{ strSameInjuries }} injury related to any motor vehicle accident?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closePopup('yes')">Yes</button>
+          <button type="button" class="btn btn-secondary" (click)="closePopup('no')">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
+<app-dialog (success)="onSuccessPopup()" (failure)="dialogService.hidePopup()"></app-dialog>
+<app-loader [loaderText]="loaderText" [showLoader]="showLoader"></app-loader>

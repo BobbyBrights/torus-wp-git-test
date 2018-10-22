@@ -1,0 +1,83 @@
+.v-cases {
+  
+  &-header {
+    background: $color-white;
+    padding: 2em;
+  }
+
+  & .cases-card {
+    padding: 1.5em;
+    box-shadow: 20px 20px 2em #f3f3f3, -2px -2px 2em #f3f3f3;
+
+    &__head {
+      color: $color-secondary;
+    }
+
+    &__tag {
+      font-size: 14px;
+      color: $color-font-light;
+    }
+  }
+
+
+
+  & .cases-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+
+    @include media-breakpoint-up(md) {
+      max-width: 1200px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+  }
+
+  & .case-header {
+    font-size: 12px;
+    padding: .2em .8em;
+    color: $color-font-light;
+    white-space: nowrap;
+  }
+
+  & .case-item {
+    background: $color-white;
+    padding: .8em;
+    border-bottom: 1px solid #dedede;
+    cursor: pointer;
+  }
+
+  & .case-selected {
+    background: lighten($color-secondary-light, 35%);
+  }
+
+  & .case-success,
+  & .case-failure {
+    padding: .4em;
+    border-radius: 4px;
+    text-align: center;
+    color: $color-white;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  & .case-success {
+    background: $success;
+  }
+
+  & .case-failure {
+    background: $danger;
+  }
+
+  & .card-label {
+      display: block;
+
+      @include media-breakpoint-up(md) {
+        display: none;  
+      }
+
+
+  }
+
+}

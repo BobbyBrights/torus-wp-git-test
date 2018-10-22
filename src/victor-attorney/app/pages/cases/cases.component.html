@@ -1,0 +1,136 @@
+<section class="v-cases u-min-700  mb-5">
+  <div class="container-fluid v-cases-header mb-1">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-12 text-center">
+        <input class="btn btn-light btn-light--tran mr-3" type="button" value="Open Cases" [ngClass]="(openCasesVisible) ?'text-warning' : '' "
+          (click)="openCasesVisible = true; closedCasesVisible = false">
+        <input class="btn btn-light btn-light--tran" type="button" value="Closed Cases" [ngClass]="(closedCasesVisible) ?'text-warning' : '' "
+          (click)="closedCasesVisible = true; openCasesVisible = false;">
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-12 col-md-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="cases-card">
+              <h3 class="cases-card__head">{{ totalCases || '101' }}</h3>
+              <h6 class="cases-card__tag">TOTAL CASES</h6>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="cases-card">
+              <h3 class="cases-card__head">0</h3>
+              <h6 class="cases-card__tag">NON-COMPLIANT CASES</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cases-container mt-4">
+    <div class="row">
+      <div class="col-12 mx-auto">
+        <div class="row">
+          <div class="col-6 p-0">
+            <div class="form-group">
+              <input type="text" name="searchattorney" class="form-control" placeholder="Search Case / Client's / Attorney's Name" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center ">
+          <div class="col">
+            <h6 class="case-header">CASE ID</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">CLIENT'S NAME</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">DOA</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">STATUS</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">LIEN TOTAL</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">30 DAY UPDATE</h6>
+          </div>
+          <div class="col">
+            <h6 class="case-header">VIEW DOCUMENT</h6>
+          </div>
+        </div>
+
+        <div (click)="setselectedCase(case)" class="row justify-content-center align-items-center case-item" [ngClass]="{'case-selected': case === selectedCase}"
+          *ngFor="let case of cases; let i = index;">
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">CASE ID</label>
+            <a href="#" class="u-remove-link" (click)="$event.preventDefault()"> {{ case.CaseId}}</a>
+          </div>
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">CLIENT NAME</label>
+            {{ case.ClientName}}
+          </div>
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">DOB</label>
+            {{ convertDateFormat(case.DOA) }}
+          </div>
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">Status</label>
+            {{ case.StatusInfo.CaseStatus}}
+          </div>
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">Lien Total</label>
+            {{ '$' + case.SettlementInfo.SettlementAmount }}
+             <!-- {{ 1234.56 | currency:"CAD":"symbol-narrow" }} -->
+          </div>
+          <div class="col-4 col-sm-4 col-md">
+            <label class="card-label">Update</label>
+            <div class="case-success">
+            <!-- <div [ngClass]="{'case-success': case.Update === 'COMPLAINT',
+            'case-failure': case.Update === 'NON COMPLAINT'}"> -->
+                COMPLAINT
+            </div>
+
+          </div>
+          <div class="col-4 col-sm-4 col-md text-right">
+            <label class="card-label">View Document</label>
+            {{ '' }}
+            <select *ngIf="case.showDocDropDown" name="viewDocument" id="viewDocument" class="form-control custom-select">
+              <option value="" class="d-none">LIEN</option>
+              <option value="">LIEN NOTICE</option>
+              <option value="">PATIENT AGREEMENT</option>
+            </select>
+
+            <span *ngIf="!case.showDocDropDown" (click)="case.showDocDropDown = true" class="case-document__icon">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+        <button [disabled]="hasCaseSelected()" (click)="navigate('update-status',$event)" class='btn btn-primary btn-semi-circle p-1'>UPDATE STATUS</button>
+      </div>
+      <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+        <button [disabled]="hasCaseSelected()" (click)="navigate('settlement-details',$event)" class='btn btn-primary btn-semi-circle p-1'>PAY LIEN</button>
+      </div>
+      <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+        <button (click)="navigate('contact-us',$event)" class='btn btn-primary btn-semi-circle p-1'>CONTACT US</button>
+      </div>
+    </div>
+  </div>
+
+
+
+</section>
+
+<app-loader [showLoader]="showLoader" [loaderText]="loaderText"></app-loader>

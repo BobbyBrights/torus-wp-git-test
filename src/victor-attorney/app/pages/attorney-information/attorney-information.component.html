@@ -1,0 +1,265 @@
+<section class="v-attorney_attorney-information pt-4 mt-1 mb-5">
+
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-8">
+
+        <h4 class="text-center mb-5">Provide Attorney Information</h4>
+
+        <form [formGroup]="attorneyInformationForm">
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="form-group">
+                <label> HAVE YOU HIRED AN ATTORNEY TO REPRESENT YOU IN YOUR ACCIDENT CASE? </label>
+                <div class="d-flex">
+                  <div class="mr-5 custom-control custom-radio">
+                    <input formControlName="HiredAttorney" class="custom-control-input" value="true" type="radio" id="HiredAttorneyYes"
+                      name="HiredAttorney">
+                    <label class="custom-control-label" for="HiredAttorneyYes">Yes</label>
+                  </div>
+                  <div class="ml-5 custom-control custom-radio">
+                    <input formControlName="HiredAttorney" class="custom-control-input" value="false" type="radio" id="HiredAttorneyNo"
+                      name="HiredAttorney">
+                    <label for="HiredAttorneyNo" class="custom-control-label">No</label>
+                  </div>
+                </div>
+                <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.HiredAttorney?.invalid && (attorneyInformationControls?.HiredAttorney.dirty || attorneyInformationControls?.HiredAttorney?.touched)">
+                  THIS FIELD IS REQUIRED
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="selectbox form-group">
+                <label for="state" class="form-label"> SELECT THE STATE YOUR ATTORNEY IS LOCATED </label>
+                <select formControlName="State" name="state" id="state" class="form-control custom-select">
+                  <option value="" class="d-none">Select</option>
+                  <option *ngFor="let state of states" [ngValue]="state.code">{{ state.value }}</option>
+                </select>
+
+                <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.State?.invalid && (attorneyInformationControls?.State.dirty || attorneyInformationControls?.State?.touched)">
+                  PLEASE SELECT THE STATE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="selectbox form-group">
+                <label for="city" class="form-label"> SELECT THE CITY YOUR ATTORNEY IS LOCATED </label>
+                <select formControlName="City" name="city" id="city" class="form-control custom-select">
+                  <option value="" class="d-none">Select</option>
+                  <option *ngFor="let city of cities" [ngValue]="city.code">{{ city.value }}</option>
+                </select>
+
+                <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.City?.invalid && (attorneyInformationControls?.City.dirty || attorneyInformationControls?.City?.touched)">
+                  PLEASE SELECT THE CITY
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="selectbox form-group">
+                <label for="attorney" class="form-label"> SELECT YOUR ATTORNEY </label>
+                <select formControlName="Attorney" name="attorney" id="attorney" class="form-control custom-select">
+                  <option value="" class="d-none">Select</option>
+                  <option *ngFor="let attorney of attorneys" [ngValue]="attorney.code">{{ attorney.value }}</option>
+                </select>
+
+                <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.Attorney?.invalid && (attorneyInformationControls?.Attorney.dirty || attorneyInformationControls?.Attorney?.touched)">
+                  PLEASE SELECT THE ATTORNEY
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="selectbox form-group">
+                <label for="lawFirm" class="form-label"> SELECT YOUR LAW FIRM </label>
+                <select formControlName="LawFirm" name="lawFirm" id="lawFirm" class="form-control custom-select">
+                  <option value="" class="d-none">Select</option>
+                  <option *ngFor="let lawFirm of lawFirms" [ngValue]="lawFirm.code">{{ lawFirm.value }}</option>
+                </select>
+
+                <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.LawFirm?.invalid && (attorneyInformationControls?.LawFirm.dirty || attorneyInformationControls?.LawFirm?.touched)">
+                  PLEASE SELECT THE LAW FIRM
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <label class="mt-4 mb-4 form-label">IF YOUR ATTORNEY IS NOT SHOWN IN THE LIST, ENTER HIS/HER INFORMATION
+            BELOW</label>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="firstname"> FIRST NAME </label>
+                <input class="form-control u-form-control-pad" type="text" formControlName="FirstName" name="firstname"
+                  maxlength="15" (keypress)="validation.allowOnlyString($event)" id="firstname">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.FirstName?.invalid && (attorneyInformationControls?.FirstName.dirty || attorneyInformationControls?.FirstName?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.PhoneNumber?.errors?.maxlength">
+                    MAXIMUM 15 CHARACTERS</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="middlename"> MIDDLE NAME </label>
+                <input class="form-control u-form-control-pad" type="text" formControlName="MiddleName" name="middlename"
+                  maxlength="15" (keypress)="validation.allowOnlyString($event)" id="middlename">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.MiddleName?.invalid && (attorneyInformationControls?.MiddleName.dirty || attorneyInformationControls?.MiddleName?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.MiddleName?.errors?.maxlength">
+                    MAXIMUM 15 CHARACTERS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="lastname"> LAST NAME </label>
+                <input class="form-control u-form-control-pad" type="text" formControlName="LastName" name="lastname"
+                  maxlength="25" (keypress)="validation.allowOnlyString($event)" id="lastname">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.LastName?.invalid && (attorneyInformationControls?.LastName.dirty || attorneyInformationControls?.LastName?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.LastName?.errors?.maxlength">
+                    MAXIMUM 25 CHARACTERS</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="phonenumber"> PHONE NUMBER </label>
+                <input class="form-control u-form-control-pad" type="text"  (keypress)="validation.allowOnlyNumber($event)" formControlName="PhoneNumber" name="phonenumber"
+                  minlength="12" maxlength="12" id="phonenumber">
+
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.PhoneNumber?.invalid && (attorneyInformationControls?.PhoneNumber.dirty || attorneyInformationControls?.PhoneNumber?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.PhoneNumber?.errors?.minlength">
+                    MINIMUM 12 NUMBERS</p>
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.PhoneNumber?.errors?.maxlength">
+                    MAXIMUM 12 NUMBERS</p>
+                </div>
+                <!-- <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.PhoneNumber?.invalid && (attorneyInformationControls?.PhoneNumber.dirty || attorneyInformationControls?.PhoneNumber?.touched)">
+                  PLEASE ENTER THE PHONE NUMBER
+                </p> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="streetaddress"> STREET ADDRESS </label>
+                <input class="form-control u-form-control-pad" minlength="1" maxlength="35" type="text" formControlName="StreetAddress"
+                  name="streetaddress" id="streetaddress">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.StreetAddress?.invalid && (attorneyInformationControls?.StreetAddress.dirty || attorneyInformationControls?.StreetAddress?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.StreetAddress?.errors?.minlength">
+                    MINIMUM 1 CHARACTERS</p>
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.StreetAddress?.errors?.maxlength">
+                    MAXIMUM 35 CHARACTERS</p>
+                </div>
+
+                <!-- <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.StreetAddress?.invalid && (attorneyInformationControls?.StreetAddress.dirty || attorneyInformationControls?.StreetAddress?.touched)">
+                  PLEASE ENTER THE STREET ADDRESS
+                </p> -->
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="textcity"> CITY </label>
+                <input class="form-control u-form-control-pad" type="text" (keypress)="validation.allowOnlyString($event)" formControlName="TextCity" name="textcity"
+                  minlength="1" maxlength="35" id="textcity">
+
+                  <div class="form-feedback" *ngIf="attorneyInformationControls?.TextCity?.invalid && (attorneyInformationControls?.TextCity.dirty || attorneyInformationControls?.TextCity?.touched)">
+                      <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextCity?.errors?.minlength">
+                        MINIMUM 1 CHARACTERS</p>
+                      <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextCity?.errors?.maxlength">
+                        MAXIMUM 35 CHARACTERS</p>
+                    </div>
+                <!-- <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextCity?.invalid && (attorneyInformationControls?.TextCity.dirty || attorneyInformationControls?.TextCity?.touched)">
+                  PLEASE ENTER THE CITY
+                </p> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="textstate"> STATE </label>
+                <input class="form-control u-form-control-pad"  (keypress)="validation.allowOnlyString($event)" type="text" formControlName="TextState" name="textstate"
+                  id="textstate">
+
+                <!-- <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextState?.invalid && (attorneyInformationControls?.TextState.dirty || attorneyInformationControls?.TextState?.touched)">
+                  PLEASE ENTER THE STATE
+                </p> -->
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.TextState?.invalid && (attorneyInformationControls?.TextState.dirty || attorneyInformationControls?.TextState?.touched)">
+                    <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextState?.errors?.minlength">
+                      MINIMUM 2 CHARACTERS</p>
+                    <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.TextState?.errors?.maxlength">
+                      MAXIMUM 2 CHARACTERS</p>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="zip"> ZIP </label>
+                <input class="form-control u-form-control-pad" type="text" (keypress)="validation.allowOnlyNumber($event)" formControlName="Zip" name="zip" minlength="5"
+                  maxlength="10" id="zip">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.Zip?.invalid && (attorneyInformationControls?.Zip.dirty || attorneyInformationControls?.Zip?.touched)">
+                    <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.Zip?.errors?.minlength">
+                      MINIMUM 5 NUMBERS</p>
+                    <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.Zip?.errors?.maxlength">
+                      MAXIMUM 10 NUMBERS</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="textbox form-group">
+                <label class="form-label" for="emailaddress"> EMAIL ADDRESS </label>
+                <input class="form-control u-form-control-pad" type="email" formControlName="EmailAddress" name="emailaddress"
+                  maxlength="25" id="emailaddress">
+                <div class="form-feedback" *ngIf="attorneyInformationControls?.EmailAddress?.invalid && (attorneyInformationControls?.EmailAddress.dirty || attorneyInformationControls?.EmailAddress?.touched)">
+                  <p class="mt-2 v-error" *ngIf="attorneyInformationControls?.EmailAddress?.errors?.required">PLEASE
+                    ENTER THE EMAIL ADDRESS</p>
+                  <p class="mt-2 v-error" *ngIf="!attorneyInformationControls?.EmailAddress?.errors?.required && attorneyInformationControls?.EmailAddress?.errors?.email">THIS
+                    IS NOT AN EMAIL ADDRESS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-12 text-center mt-2">
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-semi-circle w-25 p-2">Save
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- [disabled]="!attorneyInformationForm.valid" -->
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<app-loader [showLoader]="showLoader"></app-loader>

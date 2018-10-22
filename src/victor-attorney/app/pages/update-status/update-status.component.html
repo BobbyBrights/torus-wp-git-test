@@ -1,0 +1,116 @@
+<section class="v-attorney_update-status u-min-700 pt-4 mt-1 mb-5">
+
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-5">
+
+        <h4 class="text-center mb-5">Update Status</h4>
+
+        <form [formGroup]="updateStatusForm" (ngSubmit)="saveStatus()">
+
+          <div class="row text-center">
+            <div class="col-10 col-md-7 mx-auto">
+              <div class="selectbox form-group">
+                <label for="casestatus" class="form-label"> WHAT IS THE STATUS OF THE CASE? </label>
+                <select formControlName="CaseStatus" name="casestatus" id="casestatus" class="form-control custom-select">
+                  <option value="" class="d-none">Select</option>
+                  <option *ngFor="let status of caseStatus" [ngValue]="status.code">{{ status.value }}</option>
+                </select>
+                <!-- <div class="form-feedback" *ngIf="updateStatusControls?.CaseStatus?.invalid && (updateStatusControls?.CaseStatus.dirty || updateStatusControls?.CaseStatus?.touched)">
+                  <p class="mt-2 v-error" *ngIf="updateStatusControls?.CaseStatus?.errors?.required">THIS FIELD IS
+                    REQUIRED</p>
+                </div> -->
+                <p class="mt-2 v-error" *ngIf="updateStatusControls?.CaseStatus?.invalid && (updateStatusControls?.CaseStatus.dirty || updateStatusControls?.CaseStatus?.touched)">
+                  THIS FIELD IS REQUIRED
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4" *ngIf="updateStatusControls.CaseStatus.value == 'SETTLED'">
+            <div class="col-10 col-md-12">
+              <div class="date form-group">
+                <label for="settlementdate" class="form-label">WHAT DATE WAS SETTLEMENT REACHED?</label>
+
+                <input [bsConfig]="bsConfig" formControlName="SettlementDate" name="settlementdate" id="settlementdate"
+                  type="text" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+                <!-- <div class="form-feedback" *ngIf="updateStatusControls?.SettlementDate?.invalid && (updateStatusControls?.SettlementDate.dirty || updateStatusControls?.SettlementDate?.touched)">
+                  <p class="mt-2 v-error" *ngIf="updateStatusControls?.SettlementDate?.errors?.required">PLEASE SELECT
+                    A DATE</p>
+                </div> -->
+                <p class="mt-2 v-error" *ngIf="updateStatusControls?.SettlementDate?.invalid && (updateStatusControls?.SettlementDate.dirty || updateStatusControls?.SettlementDate?.touched)">
+                  PLEASE SELECT A DATE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="updateStatusControls.CaseStatus.value == 'SETTLED'">
+            <div class="col-10 col-md-12">
+              <div class="date form-group">
+                <label for="LienPayDate" class="form-label">WHAT DATE DO YOU EXPECT TO PAY THE LIEN?</label>
+
+                <input [bsConfig]="bsConfig" formControlName="LienPayDate" name="LienPayDate" id="LienPayDate" type="text"
+                  placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+                <p class="mt-2 v-error" *ngIf="updateStatusControls?.LienPayDate?.invalid && (updateStatusControls?.LienPayDate.dirty || updateStatusControls?.LienPayDate?.touched)">
+                  PLEASE SELECT A DATE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="updateStatusControls.CaseStatus.value == 'PATIENT_STILL_TREATING'">
+            <div class="col-10 col-md-12">
+              <div class="date form-group">
+                <label for="TreatmentCompleteDate" class="form-label">WHAT DATE DO YOU EXPECT TREATMENT TO BE COMPLETED?</label>
+
+                <input [bsConfig]="bsConfig" formControlName="TreatmentCompleteDate" name="TreatmentCompleteDate" id="TreatmentCompleteDate"
+                  type="text" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+                <p class="mt-2 v-error" *ngIf="updateStatusControls?.TreatmentCompleteDate?.invalid && (updateStatusControls?.TreatmentCompleteDate.dirty || updateStatusControls?.TreatmentCompleteDate?.touched)">
+                  PLEASE SELECT A DATE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="updateStatusControls.CaseStatus.value == 'NEGOTIATIONS'">
+            <div class="col-10 col-md-12">
+              <div class="date form-group">
+                <label for="negotiationsdate" class="form-label">WHAT DATE DID NEGOTIATIONS BEGIN?</label>
+
+                <input [bsConfig]="bsConfig" formControlName="NegotiationsDate" name="negotiationsdate" id="negotiationsdate"
+                  type="text" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+                <p class="mt-2 v-error" *ngIf="updateStatusControls?.NegotiationsDate?.invalid && (updateStatusControls?.NegotiationsDate.dirty || updateStatusControls?.NegotiationsDate?.touched)">
+                  PLEASE SELECT A DATE
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="updateStatusControls?.CaseStatus?.value && updateStatusControls?.CaseStatus?.value != ''" class="row justify-content-center">
+            <div class="col-12 col-md-5 mt-2">
+              <div class="form-group">
+                <button type="submit"  class="btn btn-primary btn-semi-circle p-2">Save
+                </button>
+                <!-- [disabled]="!updateStatusForm.valid" -->
+              </div>
+            </div>
+            <div class="col-12 col-md-5 mt-2">
+              <div class="form-group">
+                <button type="submit" (click)="navigate('cases')" class="btn btn-outline-secondary btn-semi-circle p-2">Back
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<app-loader [showLoader]="showLoader"></app-loader>
+<app-dialog (success)="dialogService.changePopupRoute('pages/cases')" (failure)="dialogService.hidePopup()"></app-dialog>

@@ -1,0 +1,134 @@
+<section class="v-login pt-4 mt-1 mb-5">
+
+  <div class="container login-container u-height-medvh d-flex flex-column justify-content-center">
+
+    <div *ngIf="showAlert" class="row justify-content-center">
+      <div class="col-12 col-md-5">
+
+        <div id="LoginAlert" class="fade show alert v-alert p-2" role="alert">
+          <strong> {{message}} </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4  login-container__login">
+        <div class="text-center mb-4">
+          <img src="./assets/images/victor-horizontal-logo.png" class="login-container__logo" />
+        </div>
+        <form #loginForm="ngForm">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-12">
+              <h4 class="mt-4 mb-4">Login Here</h4>
+              <div class="textbox form-group d-flex flex-column position-relative">
+                <label for="userid" class="form-label"> USER ID </label>
+                <input type="text" (focus)="showAlert = false" [ngClass]="(!regStatus && showAlert) ?'error_class':''"
+                  required #userId="ngModel" class="form-control u-form-control-pad" name="userid" id="userid"
+                  [(ngModel)]="loginData.UserName" />
+                <span class="login-success__icon">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <p class="mt-2 v-error" *ngIf="userId.invalid && (userId.dirty || userId.touched)">
+                  Please enter your User ID
+                </p>
+              </div>
+            </div>
+            <div class="col-12 col-md-12">
+              <div class="textbox form-group d-flex flex-column position-relative">
+                <label for="password" class="form-label"> PASSWORD </label>
+                <input type="password" [ngClass]="(!regStatus && showAlert) ?'error_class':''" required #password="ngModel"
+                  class="form-control u-form-control-pad" name="password" id="password" [(ngModel)]="loginData.Password" />
+                <span class="login-success__icon">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <p class="mt-2 v-error" *ngIf="password.invalid && (password.dirty || password.touched)">
+                  Please enter your Password
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-12 col-md-12 mt-2">
+              <a href="#" class="login__link" (click)="navigate('ForgetId',$event)">
+                FORGOT YOUR USER ID/PASSWORD
+              </a>
+              <a href="#" class="login__link" (click)="navigate('NewUser', $event)">
+                FIRST TIME USER? SIGNUP
+              </a>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-12 col-md-12 text-center mt-2">
+              <div class="form-group mb-5">
+                <button type="submit" class="btn btn-primary btn-semi-circle w-50 p-2" (click)="login()" [disabled]="!loginForm.valid">Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="w-100"></div>
+      <div class="col-12 col-md-4 mt-2">
+        <a href="#" class="login__link" (click)="navigate('ForgetId',$event)">
+          FORGOT YOUR USER ID / PASSWORD
+        </a>
+        <a href="#" class="login__link" (click)="navigate('NewUser', $event)">
+          FIRST TIME USER? SIGNUP
+        </a>
+      </div>
+      <div class="w-100"></div>
+      <div class="col-12 col-md-2 text-center mt-3">
+        <div class="form-group">
+          <button class="btn btn-primary btn-semi-circle" (click)="login()" [disabled]="loginForm.invalid">Login
+          </button>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="ForgotPwdModal" tabindex="-1" role="dialog" aria-labelledby="ForgotPwdModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ForgotPwdModalLabel">Forgot Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="forgot-password__support">Please contact Victor Support:</div> 1-844-777-1848
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-secondary">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="LoginModalLabel">Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p [ngClass]="(regStatus==true) ?'alert alert-success':'alert alert-danger'"> {{message}} </p>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="regStatus" type="button" data-dismiss="modal" (click)="router.navigate(['patientsurvey/1'])"
+            class="btn btn-secondary">Next</button>
+          <button *ngIf="!regStatus" type="button" data-dismiss="modal" class="btn btn-secondary">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-loader [showLoader]="showLoader"></app-loader>

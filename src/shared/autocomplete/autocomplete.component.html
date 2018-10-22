@@ -1,0 +1,41 @@
+<ng-container *ngIf="formType == 'template'">
+<div class="auto-complete position-relative">
+  <input [disabled]="isDisabled" [id]="identifier" [required]="isRequired" #autoComplete="ngModel" (blur)="onBlur()" (focus)="triggerDropdown()"  [(ngModel)]="value"
+    (ngModelChange)="search()" name="autoComplete" class="form-control auto-complete__input">
+
+  <div *ngIf="showDropdown" class="auto-complete__dropdown pt-1 pb-1">
+      <div class="auto-complete__dropdown-item" (click)="setSelectedItem(item)" *ngFor="let item of items">
+        <span>{{ item[viewProperty] }}</span>
+      </div>
+  </div>
+
+  <div *ngIf="showLoading" class="auto-complete__dropdown pt-1 pb-1">
+    <div *ngIf="showLoading" class="auto-complete__dropdown-item text-center text-primary">
+      Loading...
+    </div>
+  </div>
+
+  <p class="mt-2 v-error" *ngIf="autoComplete.invalid && (autoComplete.dirty || autoComplete.touched)">
+    {{errorMessage}}
+  </p>
+</div>
+</ng-container>
+
+<ng-container *ngIf="formType == 'reactive'">
+<div [formGroup]="autoForm" class="auto-complete position-relative">
+    <input [formControlName]="formCtrlName" [disabled]="isDisabled" [id]="identifier" (blur)="onBlur()" (focus)="triggerDropdown()"
+      (ngModelChange)="search()" name="autoComplete" class="form-control auto-complete__input">
+
+    <div *ngIf="showDropdown" class="auto-complete__dropdown pt-1 pb-1">
+        <div class="auto-complete__dropdown-item" (click)="setSelectedItem(item)" *ngFor="let item of items">
+          <span>{{ item[viewProperty] }}</span>
+        </div>
+    </div>
+
+    <div *ngIf="showLoading" class="auto-complete__dropdown pt-1 pb-1">
+      <div *ngIf="showLoading" class="auto-complete__dropdown-item text-center text-primary">
+        Loading...
+      </div>
+    </div>
+  </div>
+</ng-container>

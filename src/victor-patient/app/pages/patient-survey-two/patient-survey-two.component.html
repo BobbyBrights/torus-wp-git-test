@@ -1,0 +1,367 @@
+<section class="v-accident-data mb-5">
+  <app-header></app-header>
+  <form #accDataForm="ngForm">
+    <div class="container med-w-container mt-3 mb-3 pb-2">
+      <div class="text-center pt-4 pb-4">
+
+        <h2 class="mb-2">
+          Patient Survey(Cont.)
+        </h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="sel1">What was the date of the current motor vehicle accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input [bsConfig]="bsConfig" type="text" required #AccidentDate="ngModel" [(ngModel)]="patientSurveyTwoData.AccidentDate"
+              class="form-control" name="AccidentDate" placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+
+            <p class="mt-2 v-error" *ngIf="AccidentDate.invalid && (AccidentDate.dirty || AccidentDate.touched)">
+              Please select the date
+            </p>
+            <!-- <div class="row">
+              <div class="col-4 col-md-4">
+                <select [(ngModel)]="patientSurveyTwoData.AccidentMonth" (ngModelChange)="onAccidentDateChange()" class="form-control custom-select"
+                  name="AccidentMonth" required #AccidentMonth="ngModel">
+                  <option value="" class="d-none">Month</option>
+                  <option *ngFor="let month of months" value="{{ month }}">{{ month }}</option>
+                </select>
+                <p class="mt-2 v-error" *ngIf="AccidentMonth.invalid && (AccidentMonth.dirty || AccidentMonth.touched)">
+                  Please select accident Month
+                </p>
+              </div>
+              <div class="col-4 col-md-4">
+                <select class="form-control custom-select" [(ngModel)]="patientSurveyTwoData.AccidentDay" name="AccidentDay"
+                  required #AccidentDay="ngModel">
+                  <option value="" class="d-none">Day</option>
+                  <option *ngFor="let day of days" value="{{ day }}">{{ day }}</option>
+                </select>
+                <p class="mt-2 v-error" *ngIf="AccidentDay.invalid && (AccidentDay.dirty || AccidentDay.touched)">
+                  Please select accident Date
+                </p>
+              </div>
+              <div class="col-4 col-md-4">
+                <select class="form-control custom-select" (ngModelChange)="onAccidentDateChange()" [(ngModel)]="patientSurveyTwoData.AccidentYear"
+                  name="AccidentYear" required #AccidentYear="ngModel">
+                  <option value="" class="d-none">Year</option>
+                  <option *ngFor="let year of years" value="{{ year }}">{{ year }}</option>
+                </select>
+                <p class="mt-2 v-error" *ngIf="AccidentYear.invalid && (AccidentYear.dirty || AccidentYear.touched)">
+                  Please select accident Year
+                </p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <div class="textbox form-group">
+            <label class="form-label">In which zip code did the motor vehicle accident occur?
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <input required #zipCode="ngModel" [(ngModel)]="patientSurveyTwoData.ZIPCode" (ngModelChange)="getZipInfo()"
+              (keypress)="validation.allowOnlyNumber($event)" name="zipCode" type="text" class="form-control" minlength="5"
+              maxlength="5">
+            <div class="form-control-feedback" *ngIf="zipCode.errors && (zipCode.dirty || zipCode.touched)">
+              <p class="mt-2 v-error" *ngIf="zipCode?.errors?.required">Zip Code is required</p>
+              <p class="mt-2 v-error" *ngIf="zipCode?.errors?.minlength">Zip Code must contain 5 characters
+              </p>
+            </div>
+            <div class="form-control-feedback" *ngIf="zipCodeError">
+              <p class="mt-2 v-error">Zip code is not valid </p>
+            </div>
+
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select which state did the motor vehicle accident occur?
+              <sup class="v-required-sup">*</sup>
+            </label>
+
+            <app-autocomplete required name="state" [(ngModel)]="patientSurveyTwoData.AccidentOccurState.StateAbbreviation"
+              [isRequired]="true" [showLoading]="showAutoCompleteLoader" [showDropdown]="showStateDropdown"
+              [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states" (onChange)="getState($event, true)"
+              (onSelect)="setState($event)" [modelProperty]="'StateAbbreviation'"></app-autocomplete>
+
+            <!-- <app-autocomplete required name="state" [isDisabled]="true" [(ngModel)]="patientSurveyTwoData.AccidentOccurState.StateAbbreviation"
+              [isRequired]="true" [showLoading]="showAutoCompleteLoader" [showDropdown]="showStateDropdown"
+              [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states" (onSelect)="setState($event)"
+              [modelProperty]="'StateAbbreviation'"></app-autocomplete> -->
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select which county did the motor vehicle accident occur?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <app-autocomplete required name="county" [isDisabled]="(patientSurveyTwoData.AccidentOccurState.StateAbbreviation == undefined || patientSurveyTwoData.AccidentOccurState.StateAbbreviation == '')"
+              [(ngModel)]="patientSurveyTwoData.AccidentOccurCounty.CountyName" [isRequired]="true" [showLoading]="showCountyCompleteLoader"
+              [showDropdown]="showCountyDropdown" [errorMessage]="('County is Required')" [viewProperty]="'CountyName'"
+              [items]="counties" (onChange)="getCounty($event, true)" (onSelect)="setCounty($event)" [modelProperty]="'CountyName'"></app-autocomplete>
+
+            <!-- <app-autocomplete required name="county" [isDisabled]="true" [(ngModel)]="patientSurveyTwoData.AccidentOccurCounty.CountyName"
+              [isRequired]="true" [showLoading]="showCountyCompleteLoader" [showDropdown]="showCountyDropdown"
+              [errorMessage]="('County is Required')" [viewProperty]="'CountyName'" [items]="counties" (onSelect)="setCounty($event)"
+              [modelProperty]="'CountyName'"></app-autocomplete> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select which city did the motor vehicle accident occur?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <app-autocomplete required name="city" [isDisabled]="(patientSurveyTwoData.AccidentOccurCounty.CountyName == undefined || patientSurveyTwoData.AccidentOccurCounty.CountyName == '')"
+              [(ngModel)]="patientSurveyTwoData.AccidentOccurCity.CityName" [isRequired]="true" [showLoading]="showCityCompleteLoader"
+              [showDropdown]="showCityDropdown" [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities"
+              (onChange)="getCity($event, true)" (onSelect)="setCity($event)" [modelProperty]="'CityName'"></app-autocomplete>
+
+            <!-- <app-autocomplete required name="city" [isDisabled]="cities.length == 0" [(ngModel)]="patientSurveyTwoData.AccidentOccurCity.CityName"
+              [isRequired]="true" [showLoading]="showCityCompleteLoader" [showDropdown]="showCityDropdown"
+              [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities" (onSelect)="setCity($event)"
+              [modelProperty]="'CityName'"></app-autocomplete> -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>On what street did the motor vehicle accident occur?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input type="text" class="form-control" name="AccidentOccurStreet" [(ngModel)]="patientSurveyTwoData.AccidentOccurStreet"
+              required #AccidentOccurStreet="ngModel">
+            <p class="mt-2 v-error" *ngIf="AccidentOccurStreet.invalid && (AccidentOccurStreet.dirty || AccidentOccurStreet.touched)">
+              Please type street where motor vehicle accident occur.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Did law enforcement come to the scene of the motor vehicle accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <div class="d-flex">
+              <div class="custom-control custom-radio">
+                <input required #IsLawEnforcementDept="ngModel" class="custom-control-input" (change)="lawEnforcementsChange()"
+                  [(ngModel)]="patientSurveyTwoData.IsLawEnforcementDept" value="true" id="IsLawEnforcementDeptYes"
+                  type="radio" name="IsLawEnforcementDept">
+                <label class="custom-control-label" for="IsLawEnforcementDeptYes">Yes</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" (change)="lawEnforcementsChange()" [(ngModel)]="patientSurveyTwoData.IsLawEnforcementDept"
+                  value="false" type="radio" id="IsLawEnforcementDeptNo" name="IsLawEnforcementDept">
+                <label for="IsLawEnforcementDeptNo" class="custom-control-label">No</label>
+              </div>
+              <div class="ml-2 ml-md-5 custom-control custom-radio">
+                <input class="custom-control-input" (change)="lawEnforcementsChange()" [(ngModel)]="patientSurveyTwoData.IsLawEnforcementDept"
+                  value="notSure" type="radio" id="IsLawEnforcementDeptNotSure" name="IsLawEnforcementDept">
+                <label for="IsLawEnforcementDeptNotSure" class="custom-control-label">I am not sure</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="IsLawEnforcementDept.invalid && (IsLawEnforcementDept.dirty || IsLawEnforcementDept.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Select which law enforcement department came to the scene?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select class="form-control custom-select" [disabled]="patientSurveyTwoData.IsLawEnforcementDept !== 'true'"
+              [(ngModel)]="patientSurveyTwoData.LawEnforcementDept" name="LawEnforcementDept" required
+              #LawEnforcementDept="ngModel">
+              <option value="" class="d-none">Select </option>
+              <option *ngFor="let lawEnforcement of lawEnforcements" value="{{ lawEnforcement.code }}"> {{
+                lawEnforcement.name }}</option>
+            </select>
+            <p class="mt-2 v-error" *ngIf="LawEnforcementDept.invalid && (LawEnforcementDept.dirty || LawEnforcementDept.touched)">
+              Please select law enforcement department.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label>Driver's License Number
+
+            </label>
+            <input type="text" class="form-control" name="DiverLicenseNo" [(ngModel)]="patientSurveyTwoData.DriverLicenseNo"
+              minlength="1" maxlength="25" #DiverLicenseNo="ngModel">
+            <!-- <p class="mt-2 v-error" *ngIf="DiverLicenseNo.invalid && (DiverLicenseNo.dirty || DiverLicenseNo.touched)">
+              Please type Driver's License Number
+            </p> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="IsValidLicenseYes" name="IsValidLicenseYes"
+                [(ngModel)]="patientSurveyTwoData.IsValidLicense" value="IsValidLicenseYes">
+              <label class="custom-control-label" for="IsValidLicenseYes">I have a valid driver's license but I do
+                not know the number </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="IsValidLicenseNo" name="IsValidLicenseNo" [(ngModel)]="patientSurveyTwoData.IsValidLicense"
+                value="invalidDriverLicense">
+              <label class="custom-control-label" for="IsValidLicenseNo">I do not have a valid driver's license</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label>Do you have current health insurance? <sup class="v-required-sup">*</sup></label>
+            <div class="d-flex">
+              <div class="mr-5 custom-control custom-radio">
+                <input required #HealthInsurance="ngModel" class="custom-control-input" [(ngModel)]="patientSurveyTwoData.HealthInsurance"
+                  value="true" id="HealthInsuranceYes" type="radio" name="HealthInsurance">
+                <label class="custom-control-label" for="HealthInsuranceYes">Yes</label>
+              </div>
+              <div class="ml-5 custom-control custom-radio">
+                <input class="custom-control-input" [(ngModel)]="patientSurveyTwoData.HealthInsurance" value="false"
+                  type="radio" id="HealthInsuranceNo" name="HealthInsurance">
+                <label for="HealthInsuranceNo" class="custom-control-label">No</label>
+              </div>
+            </div>
+            <p class="mt-2 v-error" *ngIf="HealthInsurance.invalid && (HealthInsurance.dirty || HealthInsurance.touched)">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label for="Occupation">What is your occupation?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input type="text" class="form-control" maxlength="25" [(ngModel)]="patientSurveyTwoData.Occupation" name="Occupation"
+              required #Occupation="ngModel">
+            <p class="mt-2 v-error" *ngIf="Occupation.invalid && (Occupation.dirty || Occupation.touched)">
+              Please type your occupation
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label for="EmployerName">Who is your Employer?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input type="text" class="form-control" maxlength="25" id="EmployerName" [(ngModel)]="patientSurveyTwoData.EmployerName"
+              name="EmployerName" required #EmployerName="ngModel">
+            <p class="mt-2 v-error" *ngIf="EmployerName.invalid && (EmployerName.dirty || EmployerName.touched)">
+              Please type employer's name.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">Do you work full time or part time?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select class="form-control custom-select" [(ngModel)]="patientSurveyTwoData.EmployerType" name="EmployerType"
+              required #EmployerType="ngModel">
+              <option value="" class="d-none">Select </option>
+              <option value="1">full-time</option>
+              <option value="2">part-time</option>
+            </select>
+            <p class="mt-2 v-error" *ngIf="EmployerType.invalid && (EmployerType.dirty || EmployerType.touched)">
+              Please select your job timing.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="form-group">
+            <label for="sel1">How many times have you previously filed an claim for injuries following a motor vehicle
+              accident?
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <label for="sel1">(not Counting this motor vehicle accident)</label>
+            <select class="form-control custom-select" [(ngModel)]="patientSurveyTwoData.ClaimforInjuries" name="ClaimforInjuries"
+              required #ClaimforInjuries="ngModel">
+              <option value="" class="d-none">Select </option>
+              <option value="None">None</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3+">3+</option>
+              <!-- <option *ngFor="let num of comboNumbers" [ngValue]="num">{{ num }}</option> -->
+            </select>
+            <p class="mt-2 v-error" *ngIf="ClaimforInjuries.invalid && (ClaimforInjuries.dirty || ClaimforInjuries.touched)">
+              Please select no of motor vehicle accidents you have claimed.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-12  text-left">
+          <div class="row">
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="navigate('PREV')" class="btn btn-primary btn-semi-circle pl-4 pr-4">Previous
+              </button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="exitPopup()" class="btn btn-outline-dark btn-semi-circle pl-4 pr-4">
+                Quit </button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button type="button" (click)="saveAndReturnPopup()" class="btn btn-primary btn-semi-circle pl-4 pr-4">
+                Save & Exit </button>
+            </div>
+            <div class="col-12 col-sm-3 col-md-3 pl-4 pr-4 mb-2">
+              <button [disabled]="accDataForm.form.invalid" type="button" (click)="navigate('NEXT')" class="btn btn-success btn-semi-circle pl-4 pr-4">
+                Continue </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>
+<app-footer></app-footer>
+<app-dialog (success)="onSuccessPopup()" (failure)="dialogService.hidePopup()"></app-dialog>
+<app-loader [loaderText]="loadingText" [showLoader]="showLoader"></app-loader>

@@ -1,0 +1,24 @@
+@mixin clearFix {
+
+    &::after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
+
+@mixin respond-to($media) {
+    @if $media == extra-small {
+        @media #{$break-extra-small} { @content; }
+    }
+    @else if $media == small {
+        @media #{$break-small} { @content; }
+    }
+    @else if $media == medium {
+        @media #{break-medium} { @content; }
+    }
+    
+    @else if $media == large {
+        @media #{break-large} { @content; }
+    }
+}

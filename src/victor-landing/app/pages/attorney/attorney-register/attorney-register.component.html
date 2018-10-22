@@ -1,0 +1,443 @@
+<section class="v-attorney-register u-min-700 pt-5 pb-5 mt-2 mb-2">
+  <!-- <app-header>
+  </app-header> -->
+  <div class="container med-w-container">
+    <!-- <form #registration="ngForm"> -->
+    <h4 class="text-center mb-4">Attorney Registration</h4>
+
+    <form [formGroup]="attorneyRegisterForm" (ngSubmit)="register()">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="FirstName"> NAME
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input class="form-control textbox_first_name u-form-control-pad" type="textbox" (keypress)="validation.allowOnlyString($event)"
+              formControlName="FirstName" name="FirstName" maxlength="15" id="FirstName">
+            <!-- *ngIf="formGroup.controls[controlName].hasError('required')" -->
+            <div class="form-feedback" *ngIf="registerFormControls?.FirstName?.invalid && (registerFormControls?.FirstName.dirty || registerFormControls?.FirstName?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.FirstName?.errors?.required">FIRSTNAME IS REQUIRED</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="MiddleName"> MIDDLE
+            </label>
+            <input class="form-control textbox_middle_name u-form-control-pad" (keypress)="validation.allowOnlyString($event)"
+              type="textbox" formControlName="MiddleName" name="MiddleName" maxlength="15" id="MiddleName">
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="LastName"> LAST
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input class="form-control textbox_last_name u-form-control-pad" (keypress)="validation.allowOnlyString($event)"
+              type="textbox" maxlength="25" formControlName="LastName" name="LastName" id="LastName">
+            <div class="form-feedback" *ngIf="registerFormControls?.LastName?.invalid && (registerFormControls?.LastName.dirty || registerFormControls?.LastName?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.LastName?.errors?.required">LASTNAME IS REQUIRED</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="Suffix"> SUFFIX
+            </label>
+            <input class="form-control textbox_suffix u-form-control-pad" type="textbox" name="Suffix" id="Suffix"
+              formControlName="Suffix">
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="dropdown form-group">
+            <label class="form-label" for="LawFirm">LAW FIRM
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <select class="form-control dropdown_exist_law_firm " (change)="onItemChange($event)" formControlName="LawFirm"
+              name="LawFirm" id="LawFirm">
+              <option value="" class="d-none">SELECT LAW FIRM </option>
+              <option *ngFor="let lawEnforcement of lawEnforcements" [ngValue]="lawEnforcement.code">
+                {{lawEnforcement.name}}</option>
+            </select>
+            <div class="form-feedback" *ngIf="registerFormControls?.LawFirm?.invalid && (registerFormControls?.LawFirm.dirty || registerFormControls?.LawFirm?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.LawFirm?.errors?.required"> LAW FIRM IS
+                REQUIRED</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="EmailId"> EMAIL ADDRESS
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input class="form-control textbox_email u-form-control-pad" maxlength="25" type="email" formControlName="EmailId"
+              name="EmailId" id="EmailId">
+            <div class="form-feedback" *ngIf="registerFormControls?.EmailId?.invalid && (registerFormControls?.EmailId.dirty || registerFormControls?.EmailId?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.EmailId?.errors?.required">EMAIL ADDRESS IS
+                REQUIRED</p>
+              <p class="mt-2 v-error" *ngIf="!registerFormControls?.EmailId?.errors?.required && registerFormControls?.EmailId?.errors?.email">THIS IS NOT AN EMAIL
+                ADDRESS</p>
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.TelephoneDirect?.errors?.maxlength">
+                MAXIMUM 25 CHARACTERS</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="TelephoneDirect"> TELEPHONE (DIRECT)
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input #telephone class="form-control textbox_telephone u-form-control-pad"
+            placeholder="000-000-0000" (keyup)="maskTelephone($event)"
+            (keypress)="validation.allowOnlyNumber($event)"
+              type="tel" maxlength="12" minlength="12" formControlName="TelephoneDirect" name="TelephoneDirect" id="TelephoneDirect">
+            <div class="form-feedback" *ngIf="registerFormControls?.TelephoneDirect?.invalid && (registerFormControls?.TelephoneDirect.dirty || registerFormControls?.TelephoneDirect?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.TelephoneDirect?.errors?.required">TELEPHONE IS
+                REQUIRED</p>
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.TelephoneDirect?.errors?.minlength">
+                MINIMUM 10 NUMBERS</p>
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.TelephoneDirect?.errors?.maxlength">
+                MAXIMUM 10 NUMBERS</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4" *ngIf="showOthersExisting">
+          <div class="textbox form-group">
+            <label class="form-label" for="NameOfLawFirm"> NAME OF LAW FIRM
+              <sup class="v-required-sup">*</sup>
+            </label>
+            <input class="form-control textbox_email u-form-control-pad" type="text" (keypress)="validation.allowOnlyString($event)"
+              formControlName="NameOfLawFirm" name="NameOfLawFirm" maxlength="35" id="NameOfLawFirm">
+            <div class="form-feedback" *ngIf="registerFormControls?.NameOfLawFirm?.invalid && (registerFormControls?.NameOfLawFirm.dirty || registerFormControls?.NameOfLawFirm?.touched)">
+              <p class="mt-2 v-error" *ngIf="registerFormControls?.NameOfLawFirm?.errors?.maxlength"> MAXIMUM 35
+                CHARACTERS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row w-100">
+        <div class="col-12 col-md-4">
+          <label class="form-label"> Primary Address</label>
+        </div>
+      </div> -->
+
+      <div formGroupName="PrimaryAddress">
+        <label class="form-label"> Primary Address</label>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <!-- <label class="form-label"> Primary Address STREET ADDRESS -->
+              <label class="form-label" for="Street"> STREET ADDRESS
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_primaryAddress u-form-control-pad" minlength="1" maxlength="35" type="textbox"
+                formControlName="Street" name="Street" id="Street">
+              <div class="form-feedback" *ngIf="primaryAddress?.Street?.invalid && (primaryAddress?.Street.dirty || primaryAddress?.Street?.touched)">
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.Street?.errors?.required">STREET
+                  ADDRESS IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.Street?.errors?.minlength">
+                  MINIMUM 1 CHARACTERS</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.Street?.errors?.maxlength">
+                  MAXIMUM 35 CHARACTERS</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="PrimarySuite"> SUITE #
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_suit u-form-control-pad" type="textbox" formControlName="Suite" name="PrimarySuite"
+                id="PrimarySuite">
+              <div class="form-feedback" *ngIf="primaryAddress?.Suite?.invalid && (primaryAddress?.Suite.dirty || primaryAddress?.Suite?.touched)">
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.Suite?.errors?.required">SUITE IS REQUIRED</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="Zip"> ZIP
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_zip u-form-control-pad" (keypress)="validation.allowOnlyNumber($event)"
+                type="textbox" formControlName="Zip" name="Zip" id="Zip" maxlength="5">
+              <div class="form-feedback" *ngIf="primaryAddress?.Zip?.invalid && (primaryAddress?.Zip.dirty || primaryAddress?.Zip?.touched)">
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.Zip?.errors?.required">ZIP IS REQUIRED</p>
+              </div>
+              <p class="mt-2 v-error" *ngIf="primaryAddress?.Zip?.errors?.minlength">
+                MINIMUM 5 NUMBERS</p>
+              <p class="mt-2 v-error" *ngIf="primaryAddress?.Zip?.errors?.maxlength">
+                MAXIMUM 10 NUMBERS</p>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="State"> STATE
+              </label>
+              <!-- <input class="form-control textbox_state u-form-control-pad" (keypress)="validation.allowOnlyString($event)"
+                minlength="2" maxlength="2" type="textbox" formControlName="State" name="State" id="State"> -->
+
+              <app-autocomplete name="'state'" [isDisabled]="true" [formCtrlName]="'State'" [autoForm]="attorneyRegisterForm.get('PrimaryAddress')"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteStateLoader"
+                [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states" (onSelect)="setState($event)"
+                [modelProperty]="'StateAbbreviation'"></app-autocomplete>
+
+              <div class="form-feedback" *ngIf="primaryAddress?.State?.invalid && (primaryAddress?.State.dirty || primaryAddress?.State?.touched)">
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.State?.errors?.required">STATE
+                  ADDRESS IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.State?.errors?.minlength">
+                  MINIMUM 2 CHARACTERS</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.State?.errors?.maxlength">
+                  MAXIMUM 2 CHARACTERS</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="City"> CITY
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <!-- <input class="form-control textbox_city u-form-control-pad" type="textbox" (keypress)="validation.allowOnlyString($event)"
+                  minlength="1" maxlength="25" formControlName="City" name="City" id="City"> -->
+
+              <!-- <app-autocomplete name="'city'" [isDisabled]="cities.length == 0" [(ngModel)]="registerAcc.City.CityName"
+                  required [isRequired]="'true'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteCityLoader"
+                  [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities" (onSelect)="setCity($event)"
+                  [modelProperty]="'CityName'"></app-autocomplete> -->
+
+              <app-autocomplete name="'city'" [isDisabled]="cities.length == 0" [formCtrlName]="'City'" [autoForm]="attorneyRegisterForm.get('PrimaryAddress')"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteCityLoader"
+                [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities.primaryAddress"
+                (onSelect)="setCity($event)" [modelProperty]="'CityName'"></app-autocomplete>
+
+              <div class="form-feedback" *ngIf="primaryAddress?.City?.invalid && (primaryAddress?.City.dirty || primaryAddress?.City?.touched)">
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.City?.errors?.required">CITY IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.State?.errors?.minlength">
+                  MINIMUM 1 CHARACTERS</p>
+                <p class="mt-2 v-error" *ngIf="primaryAddress?.State?.errors?.maxlength">
+                  MAXIMUM 25 CHARACTERS</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row w-100">
+        <div class="col-12 col-md-4">
+          <label class="form-label"> Mailling Address</label>
+        </div>
+      </div> -->
+      </div>
+      <div formGroupName="MailingAddress">
+        <label class="form-label mt-1"> Mailling Address</label>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <!-- <label class="form-label"> Primary Address STREET ADDRESS -->
+              <label class="form-label" for="PoBox"> P.O. BOX
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_primaryAddress u-form-control-pad" minlength="1" maxlength="35" type="textbox"
+                formControlName="PoBox" name="PoBox" id="PoBox">
+              <div class="form-feedback" *ngIf="mailingAddress?.PoBox?.invalid && (mailingAddress?.PoBox.dirty || mailingAddress?.PoBox?.touched)">
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.PoBox?.errors?.required">P.O BOX IS
+                  REQUIRED</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="MailingSuite"> SUITE #
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_suit u-form-control-pad" type="textbox" formControlName="Suite" name="MailingSuite"
+                id="MailingSuite">
+              <div class="form-feedback" *ngIf="mailingAddress?.Suite?.invalid && (mailingAddress?.Suite.dirty || mailingAddress?.Suite?.touched)">
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.Suite?.errors?.required">SUITE IS REQUIRED</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="Zip"> ZIP
+                <sup class="v-required-sup">*</sup>
+              </label>
+              <input class="form-control textbox_zip u-form-control-pad" type="textbox" (keypress)="validation.allowOnlyNumber($event)"
+                formControlName="Zip" name="Zip" id="Zip" maxlength="5">
+              <div class="form-feedback" *ngIf="mailingAddress?.Zip?.invalid && (mailingAddress?.Zip.dirty || mailingAddress?.Zip?.touched)">
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.Zip?.errors?.required">ZIP IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.Zip?.errors?.minlength">
+                  MINIMUM 5 NUMBERS</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.Zip?.errors?.maxlength">
+                  MAXIMUM 10 NUMBERS</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="State"> STATE
+                <sup class="v-required-sup">*</sup>
+              </label>
+
+              <app-autocomplete name="'state'" [isDisabled]="true" [formCtrlName]="'State'" [autoForm]="attorneyRegisterForm.get('MailingAddress')"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteStateLoader"
+                [errorMessage]="'State is Required'" [viewProperty]="'StateName'" [items]="states" [modelProperty]="'StateAbbreviation'"></app-autocomplete>
+
+              <!-- <input class="form-control textbox_state u-form-control-pad" (keypress)="validation.allowOnlyString($event)"
+                minlength="2" maxlength="2" type="textbox" formControlName="State" name="State" id="State"> -->
+              <div class="form-feedback" *ngIf="mailingAddress?.State?.invalid && (mailingAddress?.State.dirty || mailingAddress?.State?.touched)">
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.State?.errors?.required">STATE
+                  ADDRESS IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.State?.errors?.minlength">
+                  MINIMUM 2 CHARACTERS</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.State?.errors?.maxlength">
+                  MAXIMUM 2 CHARACTERS</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="textbox form-group">
+              <label class="form-label" for="City"> CITY
+                <sup class="v-required-sup">*</sup>
+              </label>
+
+              <app-autocomplete name="'city'" [isDisabled]="cities.length == 0" [formCtrlName]="'City'" [autoForm]="attorneyRegisterForm.get('MailingAddress')"
+                [formType]="'reactive'" [showDropdown]="showDropdown" [showLoading]="showAutoCompleteCityLoader"
+                [errorMessage]="'City is Required'" [viewProperty]="'CityName'" [items]="cities.mailingAddress"
+                [modelProperty]="'CityName'"></app-autocomplete>
+
+              <div class="form-feedback" *ngIf="mailingAddress?.City?.invalid && (mailingAddress?.City.dirty || mailingAddress?.City?.touched)">
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.City?.errors?.required">CITY IS REQUIRED</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.State?.errors?.minlength">
+                  MINIMUM 1 CHARACTERS</p>
+                <p class="mt-2 v-error" *ngIf="mailingAddress?.State?.errors?.maxlength">
+                  MAXIMUM 25 CHARACTERS</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" formGroupName="PasswordGp">
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="Password"> CREATE PASSWORD
+            </label>
+            <input class="form-control u-form-control-pad" type="password" name="Password" id="Password"
+              formControlName="Password">
+
+            <div class="form-feedback" *ngIf="passwordControls?.Password?.invalid && (passwordControls?.Password.dirty || passwordControls?.Password?.touched)">
+              <p class="mt-2 v-error" *ngIf="passwordControls?.Password?.errors?.required">
+                PASSWORD IS REQUIRED</p>
+              <p class="mt-2 v-error" *ngIf="passwordControls?.Password?.errors?.pattern">
+                PASSWORD SHOULD CONTAIN A NUMBER AND A SPECIAL CHARACTER
+              </p>
+              <p class="mt-2 v-error" *ngIf="passwordControls?.Password?.errors?.MatchPassword">
+                PASSWORD NOT MATCHES
+              </p>
+            </div>
+            <!-- <p class="mt-2 v-error" *ngIf="registerFormControls?.Password?.invalid && (registerFormControls?.Password.dirty || registerFormControls?.Password?.touched)">
+              PASSWORD IS REQUIRED
+            </p> -->
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="textbox form-group">
+            <label class="form-label" for="ConfirmPassword"> CONFIRM PASSWORD
+            </label>
+            <input class="form-control u-form-control-pad" type="password" name="ConfirmPassword" id="ConfirmPassword"
+              formControlName="ConfirmPassword">
+
+            <div class="form-feedback" *ngIf="passwordControls?.ConfirmPassword?.invalid && (passwordControls?.ConfirmPassword.dirty || passwordControls?.ConfirmPassword?.touched)">
+              <p class="mt-2 v-error" *ngIf="passwordControls?.ConfirmPassword?.errors?.required">
+                CONFIRM PASSWORD IS REQUIRED</p>
+              <p class="mt-2 v-error" *ngIf="passwordControls?.ConfirmPassword?.errors?.pattern">
+                PASSWORD SHOULD CONTAIN A NUMBER AND A SPECIAL CHARACTER
+              </p>
+              <p class="mt-2 v-error" *ngIf="passwordControls?.ConfirmPassword?.errors?.MatchPassword">
+                PASSWORD NOT MATCHES
+              </p>
+            </div>
+            <!-- <p class="mt-2 v-error" *ngIf="registerFormControls?.ConfirmPassword?.invalid && (registerFormControls?.ConfirmPassword.dirty || registerFormControls?.ConfirmPassword?.touched)">
+                CONFIRM PASSWORD IS REQUIRED
+            </p>
+            <p class="mt-2 v-error" *ngIf="registerFormControls?.ConfirmPassword.errors?.MatchPassword">PASSWORD
+              NOT MATCHES
+            </p> -->
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="w-100"></div>
+        <div class="col-12 col-md-12 text-center mt-2">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-semi-circle w-25 p-2" [disabled]="!attorneyRegisterForm.valid">Register
+            </button>
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 text-center mt-2 mb-5">
+          <a [routerLink]="['/pages/attorney-login']">Back to Login</a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<div class="modal fade" id="RegisterSuccessModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+  aria-labelledby="RegisterSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="RegisterSuccessModalLabel">Your User ID and Password</h5> -->
+        <h5 class="modal-title" id="RegisterSuccessModalLabel">Attorney Registration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p [ngClass]="{'alert alert-danger': !regStatus}">{{message}}</p>
+        <div class="alert alert-success" *ngIf="regStatus">
+          <p>
+            <span class="font-weight-bold mr-2">USER ID:</span> {{ userRegData.USERID }}</p>
+          <p>
+            <span class="font-weight-bold mr-2">PASSWORD:</span> {{ userRegData.PASSWORD }}</p>
+        </div>
+        <p>Check your email inbox for a copy of this information.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="regStatus" type="button" data-dismiss="modal" (click)="router.navigate(['pages/attorney-login'])"
+          class="btn btn-secondary">BACT TO LOGIN</button>
+        <button *ngIf="!regStatus" type="button" data-dismiss="modal" class="btn btn-secondary">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader [showLoader]="showLoader"></app-loader>

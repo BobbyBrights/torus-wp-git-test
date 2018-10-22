@@ -1,0 +1,15 @@
+<!-- <div *ngIf="showLoader" class="loader-container">
+  <div class="loader-ellipsis"><div></div><div></div><div></div><div></div></div>  
+</div> -->
+
+<div *ngIf="showLoader" class="loader-container">
+  <div class="loader-circle__box d-flex align-items-center">
+    <div class="loader-circle">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="p-3 font-weight-bold">{{ loaderText }}</div>
+  </div>
+</div>

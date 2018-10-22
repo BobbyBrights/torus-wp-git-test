@@ -1,0 +1,259 @@
+<section class="v-attorney-login-accountinfo u-bg-white pt-4 mt-1 mb-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+
+        <div class="text-center mt-4 mb-4">
+          <input class="btn btn-light btn-light--tran" type="button" value="Login Info" [ngClass]="(logInfoVisible) ?'text-warning' : '' "
+            (click)="showLoginfo()">
+          <input class="btn btn-light btn-light--tran" type="button" value="Account Info" [ngClass]="(accountInfoVisible) ?'text-warning' : '' "
+            (click)="showAccountinfo()">
+          <!-- <button type="button" class="btn btn-light">Light</button> -->
+        </div>
+
+        <!-- LOGIN INFO TAB -->
+
+        <div class="row mt-5 justify-content-center" *ngIf="logInfoVisible">
+          <div class="col-12 col-md-8">
+            <div *ngIf="showAlert" class="row justify-content-center">
+              <div class="col-12 col-md-12">
+
+                <div id="LoginAlert" class="fade show alert v-alert p-2" role="alert">
+                  <strong> {{message}} </strong>
+                  <span *ngIf="!updatePassStatus" (click)="showAlert = false" class="alert__icon pull-right">
+                    <i class="fa fa-close"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <h5>Update Password</h5>
+            <form [formGroup]="LogInfo" (ngSubmit)="logInfoSubmit()">
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label" for="CurrentPassword">Current Password
+                      <sup class="v-required-sup">*</sup>
+                    </label>
+                    <input class="form-control u-form-control-pad" type="password" formControlName="CurrentPassword"
+                      name="CurrentPassword" id="CurrentPassword">
+                    <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.CurrentPassword?.invalid && (attorneyLogInfoControls?.CurrentPassword.dirty || attorneyLogInfoControls?.CurrentPassword?.touched)">
+                      PLEASE ENTER THE CURRENT PASSWORD
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label" for="NewPassword">New Password
+                      <sup class="v-required-sup">*</sup>
+                    </label>
+                    <input class="form-control u-form-control-pad" type="password" formControlName="NewPassword" name="NewPassword"
+                      id="NewPassword">
+
+                    <div class="form-feedback" *ngIf="attorneyLogInfoControls?.NewPassword?.invalid && (attorneyLogInfoControls?.NewPassword.dirty || attorneyLogInfoControls?.NewPassword?.touched)">
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.NewPassword?.errors?.required">
+                        NEW PASSWORD IS REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.NewPassword?.errors?.pattern">
+                        PASSWORD SHOULD CONTAIN A NUMBER AND A SPECIAL CHARACTER
+                      </p>
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.NewPassword?.errors?.MatchPassword">
+                        PASSWORD NOT MATCHES
+                      </p>
+                    </div>
+                    <!-- <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.NewPassword?.invalid && (attorneyLogInfoControls?.NewPassword.dirty || attorneyLogInfoControls?.NewPassword?.touched)">
+                      PLEASE ENTER THE NEW PASSWORD
+                    </p> -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- (change)="compareNewPassword()" -->
+
+              <div class="row mb-3">
+                <div class="col-12 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label" for="ConfirmPassword">Confirm Password
+                      <sup class="v-required-sup">*</sup>
+                    </label>
+                    <input class="form-control u-form-control-pad" type="password" formControlName="ConfirmPassword"
+                      name="ConfirmPassword" id="ConfirmPassword">
+
+                    <div class="form-feedback" *ngIf="attorneyLogInfoControls?.ConfirmPassword?.invalid && (attorneyLogInfoControls?.ConfirmPassword.dirty || attorneyLogInfoControls?.ConfirmPassword?.touched)">
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.ConfirmPassword?.errors?.required">
+                        CONFIRM PASSWORD IS REQUIRED</p>
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.ConfirmPassword?.errors?.pattern">
+                        PASSWORD SHOULD CONTAIN A NUMBER AND A SPECIAL CHARACTER
+                      </p>
+                      <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.ConfirmPassword?.errors?.MatchPassword">
+                        PASSWORD NOT MATCHES
+                      </p>
+                    </div>
+                    <!-- <p class="mt-2 v-error" *ngIf="attorneyLogInfoControls?.ConfirmPassword?.invalid && (attorneyLogInfoControls?.ConfirmPassword.dirty || attorneyLogInfoControls?.ConfirmPassword?.touched)">
+                      PLEASE ENTER THE CONFIRM PASSWORD
+                    </p>
+                    <p class="mt-2 v-error" *ngIf="passwordCheckErrMsg && attorneyLogInfoControls?.ConfirmPassword?.valid && (attorneyLogInfoControls?.ConfirmPassword.dirty || attorneyLogInfoControls?.ConfirmPassword?.touched) ">
+                      NEW PASSWORD AND CONFIRM PASSWORD ARE NOT SAME
+                    </p> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 justify-content-center">
+
+                <div class="col-12 col-md-4">
+                  <div class="form-group">
+                    <input class="btn  btn-primary btn-semi-circle mt-4" [disabled]="LogInfo.invalid" (click)=updatePassword()
+                      type="button" value="Save">
+                    <!-- [disabled]="LogInfo.invalid || inValidForm" -->
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="form-group">
+                    <input class="btn  btn-outline-secondary btn-semi-circle mt-4" (click)="navigate('cases')" type="button" value="Back">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ACCOUNT INFO TAB -->
+
+        <div class="align-item-center  justify-content-center" *ngIf="accountInfoVisible">
+          <h5 class="mt-2 mb-2">Update Personal Info</h5>
+          <form [formGroup]="AccountInfo" (ngSubmit)="accountInfoSubmit()">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="FirstName" class="form-label">FIRST NAME
+                    <sup class="v-required-sup">*</sup>
+                  </label>
+                  <input class="form-control u-form-control-pad" type="text" maxlength="15" (keypress)="validation.allowOnlyString($event)"
+                    name="FirstName" id="FirstName" formControlName="FirstName">
+                  <div class="form-feedback" *ngIf="attorneyAccountInfoControls?.FirstName?.invalid && (attorneyAccountInfoControls?.FirstName.dirty || attorneyAccountInfoControls?.FirstName?.touched)">
+                    <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.FirstName?.errors?.required">FIRSTNAME
+                      IS
+                      REQUIRED</p>
+                    <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.FirstName?.errors?.maxlength">
+                      Maximum 25 LETTERS</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="MiddleName" class="form-label">MIDDLE NAME </label>
+                  <input class="form-control u-form-control-pad" type="text" maxlength="25" name="MiddleName"
+                    (keypress)="validation.allowOnlyString($event)" id="MiddleName" formControlName="MiddleName">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="LastName" class="form-label"> LAST NAME
+                    <sup class="v-required-sup">*</sup>
+                  </label>
+                  <input class="form-control u-form-control-pad" type="text" maxlength="35" (keypress)="validation.allowOnlyString($event)"
+                    name="LastName" id="LastName" formControlName="LastName">
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.LastName?.invalid && (attorneyAccountInfoControls?.LastName.dirty || attorneyAccountInfoControls?.LastName?.touched)">
+                    PLEASE ENTER THE LAST NAME
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="TelephoneDirect" class="form-label"> TELEPHONE (DIRECT)
+                    <sup class="v-required-sup">*</sup>
+                  </label>
+                  <input class="form-control u-form-control-pad" type="text" (keypress)="validation.allowOnlyNumber($event)"
+                    name="TelephoneDirect" minlength="12" maxlength="12" id="TelephoneDirect" formControlName="TelephoneDirect">
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneDirect?.invalid && (attorneyAccountInfoControls?.TelephoneDirect.dirty || attorneyAccountInfoControls?.TelephoneDirect?.touched)">
+                    PLEASE ENTER THE TELEPHONE (DIRECT)
+                  </p>
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneDirect?.valid && attorneyAccountInfoControls?.TelephoneDirect?.errors?.minlength">
+                    MINIMUM 12 NUMBERS</p>
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneDirect?.valid && attorneyAccountInfoControls?.TelephoneDirect?.errors?.maxlength">
+                    MAXIMUM 12 NUMBERS</p>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="TelephoneMobile" class="form-label"> TELEPHONE (MOBILE)</label>
+                  <input class="form-control u-form-control-pad" type="text" (keypress)="validation.allowOnlyNumber($event)"
+                    name="TelephoneMobile" minlength="12" maxlength="12" id="TelephoneMobile" formControlName="TelephoneMobile">
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneMobile?.invalid && (attorneyAccountInfoControls?.TelephoneMobile.dirty || attorneyAccountInfoControls?.TelephoneMobile?.touched)">
+                    PLEASE ENTER THE TELEPHONE (MOBILE)
+                  </p>
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneMobile?.valid && attorneyAccountInfoControls?.TelephoneMobile?.errors?.minlength">
+                    MINIMUM 12 NUMBERS</p>
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.TelephoneMobile?.valid && attorneyAccountInfoControls?.TelephoneMobile?.errors?.maxlength">
+                    MAXIMUM 12 NUMBERS</p>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="SettlementDate" class="form-label">ENTER DATE OF SETTLEMENT
+                    <sup class="v-required-sup">*</sup>
+                  </label>
+                  <input [bsConfig]="bsConfig" name="SettlementDate" id="SettlementDate" type="text" formControlName="SettlementDate"
+                    placeholder="mm/dd/yyyy" class="form-control" bsDatepicker>
+                  <p class="mt-2 v-error" *ngIf="attorneyAccountInfoControls?.SettlementDate?.invalid && (attorneyAccountInfoControls?.SettlementDate.dirty || attorneyAccountInfoControls?.SettlementDate?.touched)">
+                    PLEASE ENTER THE DATE OF SETTLEMENT
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 mb-2">
+              <div class="col-12 col-md-6">
+                <h4>Update Profile Image</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-8">
+                <div class="form-group">
+                  <input class="btn btn-secondary btn-semi-circle text-warning p-1 u-text-small mt-2 upload_img_input"
+                    formControlName="profileImage" type="file" (change)="handleFileUpload($event)" id="profilepic"
+                    value="">
+                  <label for="profilepic" class="button_view_label btn-secondary text-warning"><span class="ml-2" *ngIf="!fileName">
+                      Upload Photo</span> <span *ngIf="fileName" class="ml-2">{{fileName}}</span> <span *ngIf="fileName"
+                      class="text-white float-right mr-1" aria-hidden="true">&times;</span> </label>
+                  <!-- <span>{{fileName}}</span> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <div class="form-group">
+                  <input class="btn  btn-outline-secondary btn-semi-circle p-1 mt-1 mb-2" type="button" value="Reselect Photo">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4 mb-5 justify-content-center">
+              <div class="col-12 col-md-5">
+                <div class="form-group">
+                  <input (click)="updateProfile()" [disabled]="AccountInfo.invalid" class="btn  btn-primary btn-semi-circle mt-4 mb-5"
+                    type="button" value="Save">
+                </div>
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="form-group">
+                  <input class="btn  btn-outline-secondary btn-semi-circle mt-4 mb-5" (click)="navigate('cases')"  type="button" value="Back">
+                </div>
+              </div>
+            </div>
+            <div class="w-100"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-dialog (success)="dialogService.hidePopup()"></app-dialog>
+<app-loader [loaderText]="loadingText" [showLoader]="showLoader"></app-loader>

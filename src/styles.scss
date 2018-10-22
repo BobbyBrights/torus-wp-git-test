@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+$fa-font-path: "~/font-awesome/fonts";
+@import "assets/scss/abstracts/variables.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+@import "assets/scss/base/reset.scss";
+@import "assets/scss/abstracts/utilities.scss";
+@import "assets/scss/base/error.scss";
+@import "assets/scss/base/typography.scss";
+@import "assets/scss/components/alert.scss";
+@import "assets/scss/components/autocomplete.scss";
+@import "assets/scss/components/button.scss";
+@import "assets/scss/components/nav.scss";
+@import "assets/scss/components/form.scss";
+@import "assets/scss/components/progress-bar.scss";
+@import "assets/scss/components/loader.scss";
+@import "assets/scss/components/contact_us.scss";
+@import "assets/scss/layouts/form-layout.scss";
+@import "assets/scss/layouts/footer.scss";
+@import "assets/scss/pages/login.scss";
+@import "assets/scss/pages/cases.scss";
+@import "assets/scss/pages/claimSuccess";
+@import "~font-awesome/scss/font-awesome.scss";
